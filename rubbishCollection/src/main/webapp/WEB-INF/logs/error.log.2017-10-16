@@ -1,0 +1,19 @@
+2017-10-16 17:53:27 [ http-8080-4:668425 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.setManage.controller.SetManageController  --> getAreaInfo() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 39,108 milliseconds ago.  The last packet sent successfully to the server was 21,300 milliseconds ago.
+2017-10-16 18:11:44 [ http-8080-6:78869 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.setManage.controller.SetManageController  --> getAreaInfo() Exception : org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLException: Subquery returns more than 1 row
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\setManageMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.getAreaInfo-Inline
+### The error occurred while setting parameters
+### SQL: SELECT count(*) FROM (SELECT A.AREA_CODE, A.AREA_NAME, A.AREA_GPS, A.CITY_CODE, C.CITY_NAME, DATE_FORMAT(A.CREATED_TIME, '%Y-%m-%d') CREATED_TIME FROM T_CODE_SYNC_AREA A, T_CODE_SYNC_CITY C WHERE A.DEL_FLAG = 0 AND C.CITY_CODE = (SELECT A.CITY_CODE FROM T_CODE_SYNC_AREA A WHERE A.DEL_FLAG = 0)) table_count
+### Cause: java.sql.SQLException: Subquery returns more than 1 row
+; bad SQL grammar []; nested exception is java.sql.SQLException: Subquery returns more than 1 row
+2017-10-16 18:56:56 [ http-8080-6:2790734 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.setManage.controller.SetManageController  --> getAreaInfo() Exception : org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLException: Subquery returns more than 1 row
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\setManageMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.getAreaInfo-Inline
+### The error occurred while setting parameters
+### SQL: SELECT count(*) FROM (SELECT A.AREA_CODE, A.AREA_NAME, A.AREA_GPS, A.CITY_CODE, C.CITY_NAME, DATE_FORMAT(A.CREATED_TIME, '%Y-%m-%d') CREATED_TIME FROM T_CODE_SYNC_AREA A, T_CODE_SYNC_CITY C WHERE A.DEL_FLAG = 0 AND C.CITY_CODE = (SELECT A.CITY_CODE FROM T_CODE_SYNC_AREA A WHERE A.DEL_FLAG = 0)) table_count
+### Cause: java.sql.SQLException: Subquery returns more than 1 row
+; bad SQL grammar []; nested exception is java.sql.SQLException: Subquery returns more than 1 row

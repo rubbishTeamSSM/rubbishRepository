@@ -1,0 +1,952 @@
+@CHARSET "UTF-8";
+  /*通用样式*/
+         * {
+  			outline: none;
+		}
+	     html{
+	     	height: 100%;
+	     	/*overflow-x: hidden;*/
+	     	color:#4f4f4f;
+	     	font-size: 14px/24px;
+	     }
+     	body{
+	     	position: relative;
+	     	margin: 0 auto;
+	     	width: 100%;
+	     	-webkit-box-sizing:border-box;
+	     	-moz-box-sizing:border-box;
+	     	box-sizing: border-box;
+	     	z-index: 0;
+		}
+	     div,ul,li,p{
+	     	margin: 0;
+	     	padding: 0;
+	     	outline: none;
+	     }
+	     em,strong{
+	     	font-style: normal;
+	     	font-weight: normal;
+	     }
+	     ul{
+	     	list-style: none;
+	     }
+	     /*清除浮动样式*/
+	     .clearfix:after{
+	     	display: block;
+	     	height: 0;
+	     	content: '.';
+	     	clear: both;
+	     	visibility: hidden;
+	     }
+	    /*整体布局*/
+		.qui-page{
+			padding: 10px 10px 0 10px;
+			width: 98%;
+			background-color:#96CDCD; 
+		}
+		#saerchForm{
+			padding:0;
+			margin:0;
+		}
+		.qui-header{
+			width: 100%;
+			/*height: 150px;*/
+			overflow: hidden;
+			-webkit-box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			box-sizing: border-box;
+		}
+		.qui-header .commonSearch{
+			padding: 15px 0 10px 20px;
+            background-color:#fff; 
+		}
+		.commonSearch #CONTENTContent{
+			float:left;
+			width: 80%;
+			height:46px;
+			text-indent: 20px;
+			margin-top:2px;
+			border-color:#00b1bd;
+			background:url('../../images/platformMsg/search.png') no-repeat 10px 15px;
+			padding-left:20px;
+		}
+		#CONTENT{
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 4;
+			-webkit-box-orient: vertical;
+		}
+		#searchButton{
+			position: relative;
+			float:left;
+			margin: 0 0 0 0px;
+			width: 15%;
+			height:50px;
+			color: #fff;
+			border:0;
+			background: #00b1bd;
+		}
+		.moreShow{
+			float: left;
+			margin:0 0 0 10px;
+			height: 50px;
+			line-height: 50px;
+			font-size: 14px!important;
+			font-weight: bold;
+			text-align:center;
+			cursor:pointer;
+			border-right: 1px solid #e1e1e1;
+		}
+		/*更多下拉图标*/
+		.moreSelectStyle{
+		  margin:0 0 0 10px;
+		}
+		.commonSearch .qui-faTie{
+			float: left;
+            width: 20%;
+            height: 38px;
+		}
+		.qui-faTie-text{
+			margin-left: 34%;
+			padding:5% 20%; 
+			width: 25%;
+			height: 38px;
+			line-height: 50px;
+			font-size: 14px!important;
+			color: #fff;
+			text-align: center;
+			cursor:pointer;
+			background-color:#00b1bd;
+		}
+		 /*高级搜索*/
+	    .qui-header .higherSearch{
+	     	position: relative;
+	     	/*height: 160px;*/
+	    	width: 100%;
+           line-height: 30px;
+	    }
+	    .highTitleArea{
+            background-color: #d5e6f8;
+	    }
+	    #AREA_CODE{
+	     margin-left:12px;
+	    }
+	    .searchArea .highTitleArea{
+	 	   width: 100%;
+	 	   height: 30px;
+	 	   background: #b5e6f8;
+	    }
+	    .higherSearch .highTitle{
+           float: left;
+           margin: 0 20px;
+           height: 40px;
+           line-height: 40px;
+           font-weight: bold;
+           font-size: 15px!important;
+           letter-spacing: 1px; 
+	    }
+	    .higherSearch .closeImg{
+           float: right;
+           margin: 15px 20px 0 0;
+           font-size: 20px;
+           cursor:pointer;
+	       }
+	    .higherContent{
+	    	font-size: 12px!important;
+	    	background-color: #fff;
+	    }
+	    .higherContent-top-top{
+			font-size:12px;
+	    	padding:10px 0 0 50px;
+	    }
+	    .higherContent-top-bottom{
+            padding-top: 10px;
+            padding-left: 44px!important;
+	    }
+	    .higherContent-bottomButtons{
+	    	margin-top: 10px;
+	    	width: 100%;
+	    	border-top: 2px solid #f1f1f1;
+	    }
+	    .higherContent-bottomButtonsStyle{
+	    	width: 100%;
+	    }
+	    #search{
+	    	margin: 10px 0 10px 400px;
+            width: 10%;
+            height: 28px;
+            font-size: 12px!important;
+            color: #fff;
+            border: 0;
+            border-radius: 5px;
+            cursor:pointer;
+            background-color: #00b1bd;
+	    }
+	    #resetButton{
+	    	margin: 10px 0 10px 50px;
+            width: 10%;
+            height: 28px;
+            font-size: 12px!important;
+            color: #828282;
+            border: 0;
+            border-radius: 5px;
+            cursor:pointer;
+            background-color: #e3e3e3;
+	    }
+	    .higherContent #AREA_CODE_search{
+	    	margin: 0 12px 0 10px;
+            width: 330px;
+            height: 30px;
+	    }
+	    .higherContent #UNIT_NO_search,.higherContent #BUILD_NAME_search,.higherContent #ROOM_NAME_search{
+	    	margin: 0 3xpx 0 10px;
+            width: 50px;
+            height: 23px;
+	    }
+	    .higherContent #CONTENT_search{
+	    	margin-left: 2px;
+	    	margin-right: 20px;
+            width: 200px;
+            height: 25px;
+	    }
+	    .higherContent #OWNER_NAME_search{
+	    	margin-left: 2px;
+            width: 200px;
+            height: 25px;
+	    }
+	    #noteArea{
+	    	position: relative;
+	    	width: 100%;
+	    	background-color: #fff;
+	    }
+	    .svg{
+	       margin:10px 0 0 0;
+	       box-sizing: border-box;
+	       z-index:10000000;
+	    }
+	    .container {
+			  position: relative;
+			  width: 250px;
+			  height: 104px;
+			  left: 30%;
+			  top: 20%;
+			  margin-top: -119px;
+			  margin-left: -327px;
+			  padding:20px 0 10px 0;
+			  font-size:10px!important; 
+			  background-color: #d6dadb;
+  			  box-sizing: border-box;
+			  border-radius: 6px;
+			  box-shadow: 0px 0px 24px #d6dadb;
+		}
+		.container div{
+		   margin:10px 1px;
+		}
+		/* .container:before {
+			  content: '';
+			  position: absolute;
+			  left: -14px;
+			  top: 28px;
+			  border-style: solid;
+			  border-width: 10px 14px 10px 0;
+			  border-color: rgba(0, 0, 0, 0) rgba(0 , 0, 0, 0) rgba(0, 0, 0, 0) #f3f3f3;
+		} */
+		#triangle-down {
+		    margin:0px 0 0 252px;
+		    width: 0;
+		    height: 0;
+		    border-left: 10px solid transparent;
+		    border-right: 10px solid transparent;
+		   /*  background:#d6dadb; */
+		     border-top: 10px solid #d6dadb; 
+		    /* box-shadow:0 0 4px #d6dadb; */
+		}
+		/* .xian:hover .svg{
+		    display:block;
+		} */
+	    #noteArea .note{
+	    	padding: 10px 10px 0 0;;
+	    	width: 100%;
+	    	border-top:10px solid #96CDCD;
+	    	box-sizing:border-box;
+	    }
+	    #noteArea .note .note-header{
+	    	width: 100%;
+	    	box-sizing: border-box;
+	    }
+	    #noteArea .note .note-header-left{
+	    	float: left;
+	    	width: 8%;
+	    	height: 70px;
+	    }
+	    #noteArea #HEAD_PIC_URL{
+	        margin:0 5% 0 10%;
+            width: 88%;
+            height: 105%;
+            border-radius: 100%;
+	    }
+	    #noteArea .note .note-header-right{
+	    	float: left;
+	    	margin: 0 0 0 10px;
+            width: 80%;
+            height: 70px;
+            /*line-height: 35px;*/
+	    }
+	    #noteArea .note .note-header-right .note-header-right-top{
+	    	width: 100%;
+	    }
+		 .hide{
+			display: none;
+		 }
+		 #noteArea #nameArea{
+		    float:left;
+		    margin:0 0 0 1%;
+		/*     width: 6%; */
+		     height: 35px;
+             line-height: 35px;
+             font-size: 14px!important;
+             font-weight: bold;
+		 }
+		 #noteArea #OWNER_NAME{
+		 	 float: left;
+		 	 margin:0 5px 0 0;		 	 
+		 }
+		 #noteArea #OWNER_NICK_NAME{
+		     float:left;
+		 }
+		#noteArea .arrow-bottom{
+		 	float: left;
+		 	margin:0 0 0 4px;
+		 	width: 3%;
+		 	height: 35px;
+            line-height: 35px;
+            cursor: pointer;
+		 }
+		 .arrow-bottom-replay{
+		    float: left;
+		 	/* margin:0 0 0 4px; */
+		 	width: 2%;
+		 	height: 20px;
+            line-height: 35px;
+		 }
+		 .arrow-bottom_Commit{
+		   float: left;
+		 	margin:0 0 0 4px;
+		 	width: 2%;
+		 	height: 35px;
+            line-height: 35px;
+		 }
+		 #noteArea .blockX{
+		   display:block;
+		   width:100%;
+		   height:100%;
+		 }
+		 #toolTip{
+		   position:relative;
+		   width：200px;
+		   height:40px;
+		   background:#f7f7f7;
+		 }
+		 #toolTip:after{
+		  positive:absolute;
+		  top:100%;
+		  left:15px;
+		  content:'';
+		  border:10px solid transparent;
+		  border-top-color:#f7f7f7;
+		  
+		 }
+		 #noteArea .icon-show-area{
+		 	float: left;
+		 	width: 50%;
+		 }
+		 #noteArea li{
+		 	position: relative;
+		 	top: 10px;
+		 	float: left;
+		 	margin-right: 5px;
+		 	padding:1.6px 8px;
+            font-size: 12px!important;
+            border-radius: 4px;
+		 	list-style: none;
+		 }
+         #noteArea .xian{
+            position:relative;
+         	margin:-5px 0 0 0;
+         }
+         #noteArea .xian img{
+            width:30px;
+            height:20px;
+         }
+        #noteArea .limitNote{
+         	position: relative;
+         	width: 100px;
+         	height: 40px; 
+            background-color: #fff;
+            border: 1px solid #dfdfdf;
+            z-index: 1000;
+         }
+         #noteArea .limitNoteButton{
+         	margin: 5px 10px 0 10px;
+         	width: 80px;
+         	height: 30px;
+         	line-height: 30px;
+         	font-size: 14px!important;
+         	text-align: center;
+         	border: 0;
+         	color: red;
+         	background-color: #eeeeee;
+         	z-index:1000;
+         }
+         #noteArea .recom{
+         	margin:-3.2px 5px 0 0;
+         	padding:2.3px 9px;
+         	color: #fff;
+         	background-color: #6fc56b;
+         }
+         #noteArea .classify{
+            margin:-4px 0 0 0;
+         	color: #ffa295;
+         	/*background-color: #ffa295;*/
+         	border: 1px solid #ffa295;
+         }
+         #noteArea .property{
+            margin:-5px 5px 0 -2px;
+         	color: red;
+         }
+         #noteArea .property img{
+            height:19px;
+         }
+         #noteArea .note-header-right-bottom{
+            margin:0 0 0 10px;
+            font-size: 10px!important;
+            color: #898989;
+         }
+         #noteArea	.commitOther{
+         	color:#989898;
+         }
+         .loadMoreNote{
+         	cursor:pointer;
+         }
+        #noteArea .note-header-right-bottom #CREATED_TIME{
+            float: left;
+         }
+         .domicille{
+         	float: left;
+         	margin-left: 30px;
+         }
+         #noteArea .noteArea-content{
+         	padding: 10px 10px 10px 30px;
+         	width: 100%;
+         	box-sizing: border-box;
+         }
+         .noteArea-content-text{
+         	float: left;
+         	width: 50%;
+         	/*height: 200px;*/
+         	padding: 0 0 0 5%;
+         	font-size: 14px!important;
+         	color: #848484;
+         	text-indent: 2em;
+         /*	background-color: blue;*/
+         	box-sizing: border-box;
+         	/*border-right: 1px solid red;*/
+         }
+         .noteArea-content-img{
+         	float: left;
+         	padding: 0 0 0 30px;
+         	width: 50%;
+         	/*height: 200px;*/
+         	box-sizing: border-box;
+         	border-left: 2px solid #f6f6f6;
+         	/*background-color:green;*/
+         }
+        .noteArea-content-img img{
+        	margin-right:2%; 
+            width: 20%;
+            height: 100px;
+         }
+         .noteArea-buttons{
+         	width: 100%;
+         	/*height: 40px;
+         	line-height: 40px;*/
+         	box-sizing: border-box;
+         	border-top: 2px solid #f6f6f6;
+         	cursor:pointer;
+         	/*background-color: red;*/
+         }
+         .noteArea-buttons .noteArea-buttons-style{
+            box-sizing:border-box;
+         }
+         .noteArea-buttons .item{
+         	float: left;
+         	width: 25%;
+         	font-size: 12px!important;
+         	box-sizing: border-box;
+         }
+         .noteArea-buttons .delete-note{
+         	margin:5px 0;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            box-sizing: border-box;
+            border-right: 1px solid #dedede; 
+         }
+          .noteArea-buttons .chat-note{
+         	margin:5px 0;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            box-sizing: border-box;
+            border-right: 1px solid #dedede; 
+         }
+          .noteArea-buttons .classify-note{
+         	margin:5px 0;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            box-sizing: border-box;
+            border-right: 1px solid #dedede; 
+         }
+         .noteArea-buttons .recom-note{
+         	margin:5px 0;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            box-sizing: border-box;
+         }
+        /*新写评论*/
+        	#triangle-up {
+		    width: 0;
+		    height: 0;
+            margin: 0 0 0 36.5%;
+		    border-left: 10px solid transparent;
+		    border-right: 10px solid transparent;
+		    border-bottom: 10px solid #f0f3f8;
+		}
+		.nowLoginUrl{
+		    float:left;
+		    margin-right:1%;
+			width: 3%;
+			height: 30px;
+			box-sizing:border-box;
+		}
+		.commitArea{
+			width: 100%;
+		}
+		#commitContent1{
+		  float:left;
+		  width:95%;
+		  height:30px;
+		  line-height:30px;
+		  border-color:#00b1bd;
+		}
+		.commitDetail{
+			padding: 10px 10px 0 10px;
+			width: 100%;
+			box-sizing: border-box;
+		    background: #f0f3f8;
+		}
+		#commitContent{
+			position: relative;
+			width: 100%;
+			height: 30px;
+			box-sizing: border-box;
+		}
+		.commitHeader{
+			padding-bottom: 10px;
+			width: 100%;
+			box-sizing:border-box; 
+            border-bottom:1px solid #e9eaec;
+		}
+		.commitHeader-top{
+			width: 100%;
+			box-sizing: border-box;
+		}
+		.commitHeader-bottom{
+			width: 100%;
+			font-size:12px!important;
+			box-sizing: border-box;
+		}
+		.loadUrl{
+			float: left;
+			margin:10px 0 0 4%; 
+			width: 20%;
+
+		}
+		.clickLoad,.clickReplayLoad{
+			color:red;
+		}
+		.commiting{
+			float: right;
+		}
+		.commiting button{
+		    margin:10px 10px 0 0;
+			padding: 4px 22px;
+			border:0;
+			color:#fff; 
+			background-color: #00b1bd;
+			cursor:pointer;
+		}
+		.upfile{
+			margin-top:10px;
+			float: left;
+			width: 40%;
+		}
+		.upfile .textLeft{
+		    margin-top:10px;
+			float: left;
+		}
+		.upfile .imgleft{
+			float: left;
+		}
+		 .nowCommitUrl{
+			float: left;
+			margin-right: 5px;
+           width: 50px;
+           height: 50px;
+          
+		}
+		.commitContent-left{
+			float: left;
+			width:5%;
+		}
+		.commitContent-left .commitUrl{
+			padding-left: 5%;
+            width: 30px;
+            height: 30px;
+		}
+		.commitContent-right{
+			float: left;
+			padding:0 0 0 3px;
+			width: 95%;
+			box-sizing: border-box;
+		}
+		#OWNER_NAME{
+			float: left;
+		}
+        .xian{
+        	float: left;
+        }
+		/*评论区域*/
+		.commitContent{
+			padding:10px 0 10px 0px;
+			width: 100%;
+	        font-size:12px!important; 
+			box-sizing:border-box; 
+            border-bottom:1px solid #e9eaec;
+            background-color:#f0f3f8;
+		}
+		#COMMITCONTENT{
+        
+            word-break:break-all;
+		}
+		.imageShowArea{
+		    margin: 5px 0;
+		}
+        .imageShowArea .showCommitUrl{
+            margin-right:5px;
+        	float: left;
+            width: 80px;
+            height: 80px;
+        }
+        .commitOtherButtons{
+        	float: right;
+        }
+        .commitOtherButtons .replyButton,.commitOtherButtons .deleteButton{
+        	float: left;
+        	box-sizing: border-box;
+        	padding-right:10px;
+        }
+        /*回复区域input框css*/
+        .replayArea{
+        	width: 100%;
+			box-sizing:border-box; 
+            border-bottom:1px solid #e9eaec;
+        }
+        .replayHeader{
+        	width: 96%;
+        	padding:20px;
+        	background: #fff;
+        }
+        .replayHeader-top{
+			width: 100%;
+			box-sizing: border-box;
+		}
+		#replayContent{
+			margin-bottom: 10px;
+			width: 100%;
+			height: 30px;
+			box-sizing: border-box;
+			border-color:#00b1bd;
+		}
+		.replayHeader-bottom{
+			width: 100%;
+			font-size:12px!important;
+			box-sizing: border-box;
+		}
+			.replayLoadUrl{
+			float: left;
+			width: 20%;
+
+		}
+		.downfile{
+			float: left;
+			width: 40%;
+		}
+		.downfile .replayTextLeft{
+			float: left;
+		}
+		.nowReplayUrl{
+			float: left;
+			margin-right: 5px;
+           width: 50px;
+           height: 50px;
+          
+		}
+		.downfile .replayImgleft{
+			float: left;
+			margin-top:5px;
+		}
+	   .replaying{
+			float: right;
+		}
+		.replaying button{
+			padding: 4px 20px;
+			border:0;
+			color:#fff; 
+			background-color: #00b1bd;
+			cursor:pointer;
+		}
+		/*回复*/
+		.replayAreaDetail{
+			padding: 20px;
+			width: 1240px;
+			height:100px;
+			box-sizing: border-box;
+			background-color: #e2e6ef;
+		}
+		/*加载更多*/
+		.loadMore{
+		  width:100%;
+		  height:30px;
+		  font-size:12px;
+		  line-height:30px;
+		  text-align:center;
+		  color:#00b1db;
+		  background-color:#fff;
+		  cursor:pointer;
+		  border-bottom: 10px solid #96cdcd;
+		}
+		.OWNER_NAME_Item{
+		   float: left;
+		   margin:0 5px 0 0;	
+		}
+		.arrow-bottom_commit{
+		  float: left;
+		 	margin:0 0 0 4px;
+		 	width: 1.5%;
+		 	height: 20px;
+            line-height: 35px;
+		}
+		.arrow-bottom_replay{
+		    float:left;
+		    margin:0 0 0 4px;
+		 	width: 1.5%;
+		 	height: 20px;
+            line-height: 35px;
+		}
+		.arrow-bottom_replay_right{
+		   float:left;
+		    margin:0 0 0 9px;
+		 	width: 1.5%;
+		 	height: 20px;
+            line-height: 35px;
+		}
+		.replayRight{
+		   float:left;
+		}
+		/*下方图标*/
+		.bottomIcon{
+		  /* margin:5px 0 0 -2px; */
+		}
+		/*清空默认li的默认样式*/
+		.commitDetail li{
+		   padding:0!important;
+		}
+		.m-del{
+	    position:absolute;
+	    cursor:pointer;
+	    bottom:0;
+	    display:none;
+	    width:84px;
+	    background:#bbb;
+	    text-align:center;
+	    line-height:26px;
+	    color:red;
+    }
+    	.attachment-box>div>.image{
+		position:relative;
+		height: 100px;
+		width: 80px;
+		overflow: hidden;
+	}
+    .attachment-box>div:hover .m-del{
+    	display:block;
+    }  
+    /*进度条*/
+    .loading{
+    	margin:0 auto;
+    	width:100%;
+    	height:460px;
+    	line-height:500px;
+    	background-color:#fff;
+    }
+    .loading img{
+    	position:relative;
+    	left:50%;
+    	top:40%;
+    }
+    .loadingTwice{
+    	margin:0 auto;
+    	width:100%;
+    	height:100px;
+    	line-height:100px;
+    	background-color:#fff;
+    	border:6px solid #f0f3f8;
+    }
+    .loadingTwice img{
+    	position:relative;
+    	left:50%;
+    }
+    .tooltip{
+    	position:absolute;
+    	padding:1px;
+    	display:block;
+    	color:#333;
+    	border:1px solid #333;
+    	background-color:#f7f5d1;
+    }
+	.loadingCommit{
+		position:relative;
+		left:20%;
+		top:30%;
+		box-sizing:border-box;
+	}
+	.loadingS{
+		padding:50%;
+		width:100%;
+		height:100%;
+		position:relative;
+		background:#fff;
+	}
+	/*easyui tooltip*/
+	.ui-tooltip, .arrow:after {
+    background: black;
+    border: 2px solid white;
+  }
+  .ui-tooltip {
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    text-transform: uppercase;
+    box-shadow: 0 0 7px black;
+  }
+  .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }
+  /*已读未读标记*/
+  .readFlagTip{
+  	float: right;
+  }
+  .readFlagTip img{
+	margin: -10px -40px;
+    width: 50px;
+    height: 50px;
+  }
+  #noteArea{
+  	border-bottom:10px solid #96cdcd;
+  }
+  .no-msg{
+  	padding:10px 0;
+  	width:100%;
+  	text-align:center;
+  	font-size:12px!important;
+  	border-top:10px solid #96cdcd;
+  	box-sizinig:border-box;
+  }
+  .checkps{
+    width: 84px;
+    overflow: hidden;
+    height: 26px;
+    cursor: pointer;
+    line-height: 26px;
+    color: white;
+    background:#f0f3f8;
+    text-align:left;
+    border-radius: 2px;
+  }
+  .fileUploader {
+    font-size: 200px;
+    border: 1px solid #ddd;
+    width: 80px;
+    height: 26px;
+    background: #fff;
+    position: relative;
+    top: -21px;
+    left: 0px;
+    opacity: 0;
+}
+.replayArea .checkps{
+	width: 84px;
+    overflow: hidden;
+    height: 26px;
+    cursor: pointer;
+    line-height: 26px;
+    color: white;
+    background:#fff;
+    text-align:left;
+    border-radius: 2px;
+}
+#imgshow  {  
+	width:450px;
+	height:450px;
+    position: absolute;  
+    border: 1px solid #ccc;  
+    background: #333;   
+    color: #fff;  
+    display: none;  
+}

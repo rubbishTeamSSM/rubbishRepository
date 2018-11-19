@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.sdd.businessConsole.department.dao.DepartmentDAO">
+	
+	<select id="getSystemDepartment" resultType="department">
+		SELECT UUID, DEPT_CODE, PARENT_DEPT_CODE, AUTH_CODE, DEPT_NAME, DEPT_NAME_J, MGR_USER_CODE
+		  FROM T_SYS_DEPT
+		 WHERE PARENT_DEPT_CODE = #{pid}
+		   AND DEL_FLAG = 0
+	</select>
+	
+   <select id="getDepartmentDet" resultType="department">
+		SELECT UUID,
+		       DEPT_CODE,
+		       PARENT_DEPT_CODE,
+		       AUTH_CODE,
+		       DEPT_NAME,
+		       SORT_NO,
+		       ifnull(DEPT_NAME_J, '') DEPT_NAME_J,
+		       MGR_USER_CODE,
+		       ifnull(REMARK, '') REMARK
+		  FROM T_SYS_DEPT
+		 WHERE DEPT_CODE = #{DEPT_CODE}
+	</select> 
+	
+	<insert id="addDepartment" parameterType="department">
+		INSERT INTO T_SYS_DEPT 
+			(UUID,DEPT_CODE,PARENT_DEPT_CODE,
+			DEPT_NAME,DEPT_NAME_J,REMARK,
+			CREATED_TIME,CREATED_BY,
+			DEL_FLAG,AUTH_CODE,
+			UPDATED_TIME,
+			UPDATED_BY,
+			SORT_NO) 
+		VALUES
+			(
+			#{UUID,jdbcType=VARCHAR},
+			#{DEPT_CODE,jdbcType=VARCHAR},
+			#{PARENT_DEPT_CODE,jdbcType=VARCHAR},
+			#{DEPT_NAME,jdbcType=VARCHAR},
+			#{DEPT_NAME_J,jdbcType=VARCHAR},
+			#{REMARK,jdbcType=VARCHAR}, 
+			now(),
+			#{CREATED_BY,jdbcType=VARCHAR},
+			#{DEL_FLAG,jdbcType=VARCHAR},
+			#{AUTH_CODE,jdbcType=VARCHAR},
+			now(),
+		    #{CREATED_BY,jdbcType=VARCHAR},
+		    #{SORT_NO,jdbcType=NUMERIC})
+	</insert>
+	
+	<select id="departmentHasChildren" resultType="int">
+		SELECT COUNT(1) FROM T_SYS_DEPT WHERE PARENT_DEPT_CODE = #{depId} AND DEL_FLAG = 0 
+	</select>
+	
+	<select id="isContainDEPT_CODE" resultType="int">
+		SELECT COUNT(1) FROM T_SYS_DEPT WHERE DEPT_CODE = #{DEPT_CODE} 
+	</select>
+	
+	<select id="getAllDepart" resultType="department">
+		SELECT UUID, DEPT_CODE, PARENT_DEPT_CODE, AUTH_CODE, DEPT_NAME, DEPT_NAME_J, MGR_USER_CODE
+		  FROM T_SYS_DEPT
+		 WHERE DEL_FLAG = 0
+    </select>
+    
+    <!-- 删除用户部门关系 -->
+    <delete id="deleteUserSDep">
+    	DELETE FROM T_SYS_USER_DEPT WHERE USER_CODE IN 
+    	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </delete>
+    
+   <!-- 查询用户选中的所有部门小区信息 MODIFY BY FXF 2018.1.2-->
+    <select id="getUserDepartment" resultType="java.util.HashMap">
+    	SELECT
+			DEPT_CODE,
+			SELECT_FLAG,
+			AREA_FLAG
+		FROM
+			T_SYS_USER_DEPT
+		WHERE
+			DEL_FLAG = 0
+		AND USER_CODE = #{USER_CODE}
+    </select>
+    
+    <insert id="addUserDepart" parameterType="java.util.HashMap">
+    	INSERT INTO T_SYS_USER_DEPT 
+    		(UUID,USER_CODE,DEPT_CODE,CREATED_TIME,CREATED_BY, SORT_NO, DEL_FLAG, UPDATED_TIME, UPDATED_BY)
+    	VALUES
+    		(#{UUID}, #{USER_CODE}, #{DEPT_CODE}, now(), #{CREATED_BY}, 0, 0, NOW(), #{CREATED_BY})
+    </insert>
+    
+    <!-- 用户管理-设置部门 -->
+    <insert id="addUserDeparts" parameterType="java.util.HashMap">
+    	<!-- INSERT INTO T_SYS_USER_DEPT 
+				(UUID, USER_CODE, DEPT_CODE, CREATED_TIME, CREATED_BY, SORT_NO, DEL_FLAG, UPDATED_TIME, UPDATED_BY)
+    		VALUES
+    		<foreach collection="DEPT_CODES" item="tag"  index="index" open="" close="" separator="," >
+           		(UUID(), #{USER_CODE}, #{tag}, now(), #{CREATED_BY}, #{SORT_NO}, 0, NOW(), #{CREATED_BY})
+			</foreach> -->
+		INSERT INTO T_SYS_USER_DEPT (
+			USER_CODE,
+			DEPT_CODE,
+			SELECT_FLAG,
+			AREA_FLAG,
+			DEL_FLAG,
+			UUID,
+			SORT_NO,
+			CREATED_TIME,
+			CREATED_BY,
+			UPDATED_TIME,
+			UPDATED_BY
+		)VALUES
+		<foreach collection="deptList" item="tag" index="index" open="" close="" separator=",">
+		(
+			#{USER_CODE,jdbcType=VARCHAR},
+			#{tag.DEPT_CODE,jdbcType=VARCHAR},
+			#{tag.SELECT_FLAG,jdbcType=INTEGER},
+			#{tag.AREA_FLAG,jdbcType=INTEGER},
+			0,
+			UUID(),
+			0,
+			NOW(),
+			#{CREATED_BY,jdbcType=VARCHAR},
+			NOW(),
+			#{CREATED_BY,jdbcType=VARCHAR}
+		)
+		</foreach>
+    </insert>
+    
+   <update id="modifyDepartment" parameterType="department">
+    	UPDATE T_SYS_DEPT
+		   SET DEPT_NAME = #{DEPT_NAME,jdbcType=VARCHAR}, 
+		   	   DEPT_NAME_J = #{DEPT_NAME_J,jdbcType=VARCHAR}, 
+		   	   SORT_NO = #{SORT_NO,jdbcType=NUMERIC}, 
+		   	   REMARK = #{REMARK,jdbcType=VARCHAR},
+		   	   UPDATED_TIME = NOW(),
+    		   UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR}   
+		 WHERE DEPT_CODE = #{DEPT_CODE}
+    </update>
+
+    <delete id="deleBmYh">
+        DELETE FROM T_SYS_USER_DEPT WHERE DEPT_CODE IN 
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </delete>
+
+    <update id="deleBm" parameterType="department">
+        UPDATE  T_SYS_DEPT 
+        SET      DEL_FLAG = 1,
+       			 UPDATED_TIME = NOW(),
+    			 UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR}   
+    	 WHERE DEPT_CODE IN 
+        <foreach item="item" index="index" collection="DEPT_CODES" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </update>
+
+    <delete id="deleDepGw">
+        DELETE FROM T_SYS_POST WHERE DEPT_CODE IN 
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </delete>
+    
+     <delete id="deleGwYh">
+        DELETE FROM T_SYS_USER_POST F WHERE F.POST_CODE IN 
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </delete>
+
+    <select id="getBmGw" resultType="java.lang.String">
+        SELECT POST_CODE FROM T_SYS_POST  WHERE DEPT_CODE IN 
+         <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </select>
+    
+     <select id="getAUTH_CODE" resultType="string" parameterType="department">
+      SELECT
+			CASE
+		WHEN COUNT(1) > 0 THEN
+			CONCAT(
+				#{PARENT_AUTH_CODE},
+				LPAD(
+					SUBSTR(
+						MAX(AUTH_CODE)
+						FROM
+							LENGTH(AUTH_CODE) - 2 FOR LENGTH(AUTH_CODE)
+					) + 1,
+					3,
+					0
+				)
+			)
+		ELSE
+			CONCAT(
+				#{PARENT_AUTH_CODE},
+				'000'
+			)
+		END AUTH_CODE
+		FROM
+			T_SYS_DEPT 
+		WHERE
+			PARENT_DEPT_CODE = #{PARENT_DEPT_CODE}
+    </select>
+    
+    <!--查询子公司下的所有小区信息 ADD BY FXF 2018.1.2 -->
+    <select id="getUserAreaByDept" resultType="map">
+		SELECT
+			AREA_CODE,
+			AREA_NAME,
+			DEPT_CODE
+		FROM
+			T_CODE_SYNC_AREA
+		WHERE
+			DEL_FLAG = 0
+		AND DEPT_CODE = #{deptCode}
+	</select>
+    
+    <delete id="deleteUserPostByData" parameterType="map">
+        DELETE
+		FROM
+			T_SYS_USER_POST
+		WHERE
+			AREA_CODE NOT IN (${areaCodes})
+		AND USER_CODE = #{USER_CODE}
+    </delete>
+    
+    <delete id="deleteUserAreaByData" parameterType="map">
+        DELETE
+		FROM
+			T_PM_AREA_USER
+		WHERE
+			AREA_CODE NOT IN (${areaCodes})
+		AND USER_CODE = #{USER_CODE}
+    </delete>
+</mapper>

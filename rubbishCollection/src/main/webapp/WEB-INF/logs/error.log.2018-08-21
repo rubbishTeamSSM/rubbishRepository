@@ -1,0 +1,6 @@
+2018-08-21 16:44:18 [ http-8080-2:201421 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.businessConsole.login.controller.LoginCntroller  --> getLoginUser() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: An attempt by a client to checkout a Connection has timed out.
+2018-08-21 16:44:18 [ http-8080-2:201441 ] - [ ERROR ] ==异常通知异常==
+2018-08-21 16:44:18 [ http-8080-2:201444 ] - [ ERROR ] 异常信息:null
+2018-08-21 16:50:23 [ http-8080-3:16296 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.businessConsole.login.controller.LoginCntroller  --> getLoginUser() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: An attempt by a client to checkout a Connection has timed out.
+2018-08-21 16:50:23 [ http-8080-3:16302 ] - [ ERROR ] ==异常通知异常==
+2018-08-21 16:50:23 [ http-8080-3:16304 ] - [ ERROR ] 异常信息:null

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.businessConsole.task.dao.JobInfoDAO">
+	
+	<!-- 获取定时器列表 -->
+    <select id="getJobInfoList" resultType="jobInfo" parameterType="jobInfo">
+   		SELECT JBXX.JOB_CODE,
+   			   JBXX.UUID,
+		       JBXX.JOB_MC AS JOB_NAME,
+		       JBXX.EXEC_CLASS_CODE,
+		       JBXX.CRON_EXPRESS,
+		       JBXX.DEL_FLAG,
+		       JBXX.EXEC_FLAG,
+		       DATE_FORMAT(JBXX.NEXT_EXEC_DATE, '%Y-%m-%d %T') NEXT_EXEC_DATE,
+		       RWL.EXEC_CLASS_MC AS EXEC_CLASS_NAME,
+		       RWL.EXEC_CLASS
+		  FROM T_JOB_INFO JBXX, T_JOB_CLASS_INFO RWL
+		 WHERE JBXX.EXEC_CLASS_CODE = RWL.EXEC_CLASS_CODE AND JBXX.DEL_FLAG != '2'
+			<if test="EXEC_CLASS_NAME != null and EXEC_CLASS_NAME != ''">  
+                   AND RWL.EXEC_CLASS_MC LIKE '%${EXEC_CLASS_NAME}%'                   
+            </if>
+            <if test="JOB_NAME != null and JOB_NAME != ''">  
+                 AND JBXX.JOB_MC LIKE '%${JOB_NAME}%'              
+            </if>
+            <if test="cSEXj != null and cSEXj != ''">  
+                 AND JBXX.EXEC_CLASS_CODE != '1'            
+            </if>
+            <if test="cSEXj == null or cSEXj == ''">  
+                 AND JBXX.EXEC_CLASS_CODE = '1'           
+            </if>
+		ORDER BY JBXX.CREATED_TIME DESC
+ 	</select>
+ 	
+ 	<!-- 新增定时任务基本信息 -->
+ 	<insert  id="addJobInfo"  parameterType="jobInfo"  >
+ 		INSERT INTO T_JOB_INFO
+ 			(UUID,JOB_CODE, JOB_MC, EXEC_CLASS_CODE, 
+ 			 CRON_EXPRESS, NEXT_EXEC_DATE, DEL_FLAG, 
+ 			 EXEC_FLAG, CREATED_TIME, CREATED_BY,
+ 			 SORT_NO,UPDATED_TIME,UPDATED_BY)
+		VALUES
+    		(
+    		 #{UUID,jdbcType=VARCHAR},
+    		 #{JOB_CODE,jdbcType=VARCHAR}, 
+    		 #{JOB_NAME,jdbcType=VARCHAR}, 
+    		 #{EXEC_CLASS_CODE,jdbcType=VARCHAR}, 
+    		 #{CRON_EXPRESS,jdbcType=VARCHAR}, 
+    		 #{NEXT_EXEC_DATE,jdbcType=DATE}, 
+    		 #{DEL_FLAG,jdbcType=VARCHAR}, 
+    		 #{EXEC_FLAG,jdbcType=VARCHAR}, 
+    		 now(), 
+    		 #{CREATED_BY,jdbcType=VARCHAR},
+    		 0,
+    		 now(),
+		    #{CREATED_BY,jdbcType=VARCHAR})
+ 	</insert>
+ 	
+ 	<update  id="updateJobInfo"  parameterType="jobInfo"  >
+ 		UPDATE T_JOB_INFO
+		   SET JOB_MC = #{JOB_NAME,jdbcType=VARCHAR},
+		       EXEC_CLASS_CODE = #{EXEC_CLASS_CODE,jdbcType=VARCHAR},
+		       CRON_EXPRESS = #{CRON_EXPRESS,jdbcType=VARCHAR},
+		       NEXT_EXEC_DATE = #{NEXT_EXEC_DATE,jdbcType=DATE},
+		       EXEC_FLAG = #{EXEC_FLAG,jdbcType=VARCHAR},
+		   	   UPDATED_TIME = NOW(),
+		   	   UPDATED_BY   = #{UPDATED_BY},
+		   	   DEL_FLAG = #{DEL_FLAG,jdbcType=VARCHAR}
+		 WHERE UUID = #{UUID,jdbcType=VARCHAR}
+ 	</update>
+ 	
+ 	<update  id="updateJobInfoState"  parameterType="jobInfo"  >
+ 		UPDATE T_JOB_INFO
+		   SET DEL_FLAG = #{DEL_FLAG,jdbcType=VARCHAR},
+		   	   UPDATED_TIME = NOW(),
+		   	   UPDATED_BY   = #{UPDATED_BY}
+		 WHERE UUID = #{UUID,jdbcType=VARCHAR}
+ 	</update>
+ 	
+ 	<!--  -->
+ 	<insert  id="addJOB_EXEC_CLASS"  parameterType="jobExec"  >
+ 		INSERT INTO T_JOB_CLASS_INFO
+ 			(UUID, EXEC_CLASS_MC, EXEC_CLASS, DEL_FLAG, CREATED_TIME, CREATED_BY)
+		VALUES
+			(#{UUID,jdbcType=VARCHAR}, 
+			 #{EXEC_CLASS_NAME,jdbcType=VARCHAR},
+			 #{EXEC_CLASS,jdbcType=VARCHAR},
+			 #{DEL_FLAG,jdbcType=VARCHAR}, 
+			 now(), 
+			 #{CREATED_BY,jdbcType=VARCHAR})
+ 	</insert>
+ 	
+ 	<update  id="updateJOB_EXEC_CLASS"  parameterType="jobExec"  >
+ 		UPDATE T_JOB_CLASS_INFO
+		   SET EXEC_CLASS_MC =  #{EXEC_CLASS_NAME,jdbcType=VARCHAR},
+		       EXEC_CLASS =#{EXEC_CLASS,jdbcType=VARCHAR},
+		       DEL_FLAG = #{DEL_FLAG,jdbcType=VARCHAR}
+		 WHERE UUID = #{UUID,jdbcType=VARCHAR}
+ 	</update>
+ 	
+ 	<insert  id="addJobClass"  parameterType="jobClass"  >
+ 		INSERT INTO T_JOB_EXEC_DETAIL
+ 			(UUID, JOB_CODE, START_TIME, END_TIME,
+ 			 SUCCESS_FLAG, LOG_INFO, CREATED_TIME, CREATED_BY,
+ 			 DEL_FLAG,SORT_NO,UPDATED_TIME,UPDATED_BY)
+		VALUES
+			(#{UUID,jdbcType=VARCHAR}, 
+			 #{JOB_CODE,jdbcType=VARCHAR}, 
+			 #{START_TIME,jdbcType=DATE}, 
+			 #{END_TIME,jdbcType=DATE}, 
+			 #{SUCCESS_FLAG,jdbcType=VARCHAR}, 
+			 #{LOG_INFO,jdbcType=VARCHAR}, 
+			 now(), 
+			 #{CREATED_BY,jdbcType=VARCHAR},
+			 0,
+			 0,
+			  now(), 
+			 #{CREATED_BY,jdbcType=VARCHAR})
+ 	</insert>
+ 	
+ 	<insert  id="updateJobClass"  parameterType="jobClass"  >
+ 		UPDATE T_JOB_EXEC_DETAIL
+		   SET END_TIME = now()
+		 WHERE UUID = #{UUID}
+ 	</insert>
+ 	
+ 	<select id="findData" resultType="jobInfo" parameterType="jobInfo">
+ 		SELECT JBXX.JOB_CODE,
+ 		       JBXX.UUID,
+		       JBXX.JOB_MC AS JOB_NAME,
+		       JBXX.EXEC_CLASS_CODE,
+		       JBXX.CRON_EXPRESS,
+		       JBXX.DEL_FLAG,
+		       JBXX.EXEC_FLAG,
+		       DATE_FORMAT(JBXX.NEXT_EXEC_DATE, '%Y-%m-%d %T') NEXT_EXEC_DATE,
+		       RWL.EXEC_CLASS_MC AS EXEC_CLASS_NAME,
+		       RWL.EXEC_CLASS
+		  FROM T_JOB_INFO JBXX, T_JOB_CLASS_INFO RWL
+		 WHERE JBXX.EXEC_CLASS_CODE = RWL.EXEC_CLASS_CODE
+		  AND JBXX.UUID = #{UUID}
+ 	</select>
+ 	
+ 	<select id="findJobExec" parameterType="jobClass" resultType="jobClass">
+ 		SELECT
+			T.EXEC_CLASS_CODE,
+			T.EXEC_CLASS_MC AS EXEC_CLASS_NAME,
+			T.EXEC_CLASS AS EXEC_CLASS
+		FROM
+			T_JOB_CLASS_INFO T
+		WHERE
+			T.DEL_FLAG = 0
+		AND EXEC_CLASS_CODE NOT IN (
+			SELECT
+				EXEC_CLASS_CODE
+			FROM
+				T_JOB_INFO
+			WHERE
+				DEL_FLAG != 2
+			AND EXEC_CLASS_CODE != #{EXEC_CLASS_CODE}
+		)
+ 	</select>
+ 	
+ 	<select id="findJobClass" resultType="jobExec" parameterType="jobExec">
+ 	     SELECT 
+ 	           X.JOB_MC AS JOB_NAME,
+		       DATE_FORMAT(T.START_TIME, '%Y-%m-%d %H:%i:%S') START_TIME,
+		       DATE_FORMAT(T.END_TIME, '%Y-%m-%d %H:%i:%S') END_TIME,
+		       T.LOG_INFO
+		  FROM T_JOB_EXEC_DETAIL T, T_JOB_INFO X
+		 WHERE T.JOB_CODE = X.JOB_CODE AND T.JOB_CODE = #{JOB_CODE}
+		 <if test="START_TIME != null and START_TIME != ''">                
+                <![CDATA[ 
+				 AND DATE_FORMAT(T.START_TIME, '%Y-%m-%d') >= '${START_TIME}'
+			  ]]>                           
+         </if> 
+         
+         <if test="END_TIME != null and END_TIME != ''">                
+              <![CDATA[ 
+				 AND DATE_FORMAT(T.END_TIME, '%Y-%m-%d') <= '${END_TIME}'
+			  ]]>                         
+         </if> 
+		 ORDER BY T.START_TIME DESC
+ 	</select>
+ 	
+ 	<select id="findJobClassCount" resultType="int" parameterType="jobClass">
+ 		SELECT COUNT(1)
+		  FROM T_JOB_EXEC_DETAIL T, T_JOB_INFO X
+		 WHERE T.JOB_CODE = X.JOB_CODE AND T.JOB_CODE = #{JOB_CODE}
+ 		<if test="START_TIME != null and START_TIME != ''">                
+               <![CDATA[ 
+			 AND DATE_FORMAT(T.START_TIME, '%Y-%m-%d %T') >'${START_TIME}'
+		  ]]>                           
+        </if> 
+        
+        <if test="END_TIME != null and END_TIME != ''">                
+             <![CDATA[ 
+			 AND DATE_FORMAT(T.END_TIME, '%Y-%m-%d %T') <'${END_TIME}'
+		  ]]>                         
+        </if> 
+		 ORDER BY T.START_TIME DESC
+ 	</select>
+ 	
+ 	<select id="findJobState" resultType="jobInfo" parameterType="jobInfo">
+ 		SELECT JOB_CODE JOBMC, EXEC_FLAG EXEC_FLAG
+		  FROM T_JOB_INFO
+		 WHERE JOB_CODE = #{UUID}
+ 	</select>
+ 	
+ 	<select id="searchrwjbxx" resultType="jobInfo">
+ 		SELECT JBXX.JOB_CODE UUID,
+		       JBXX.JOB_NAME JOBMC,
+		       JBXX.EXEC_CLASS_CODE EXEC_CLASS_CODE,
+		       JBXX.CRON_EXPRESS,
+		       JBXX.DEL_FLAG DEL_FLAG,
+		       JBXX.EXEC_FLAG EXEC_FLAG,
+		       DATE_FORMAT(JBXX.NEXT_EXEC_DATE, '%Y-%m-%d %T') NEXT_EXEC_DATE,
+		       RWL.EXEC_CLASS_MC EXEC_CLASS_NAME,
+		       RWL.EXEC_CLASS
+		  FROM T_JOB_INFO JBXX, T_JOB_CLASS_INFO RWL
+		 WHERE JBXX.EXEC_CLASS_CODE = RWL.UUID AND JBXX.DEL_FLAG = '1'
+	</select>
+	
+	<insert  id="insertrwyxjl"  parameterType="jobClass"  >
+		INSERT INTO T_JOB_EXEC_DETAIL 
+			(UUID,JOB_CODE,START_TIME,END_TIME,SUCCESS_FLAG,LOG_INFO,CREATED_TIME,CREATED_BY,
+			DEL_FLAG,SORT_NO,UPDATED_TIME,UPDATED_BY)
+		VALUES
+			(#{UUID,jdbcType=VARCHAR}, 
+			 #{JOB_CODE,jdbcType=VARCHAR}, 
+			 now(), 
+			 now(), 
+			 0, 
+			 #{LOG_INFO,jdbcType=VARCHAR}, 
+			 now(), 
+			 #{CREATED_BY,jdbcType=VARCHAR},
+			 0,
+			 0,
+			 now(), 
+			 #{CREATED_BY,jdbcType=VARCHAR})
+	</insert>
+
+ 	<update  id="updaterwjbxx"  parameterType="java.lang.String"  >
+		UPDATE T_JOB_INFO SET EXEC_FLAG = '1' WHERE JOB_CODE = #{JOB_CODE}
+ 	</update>
+ 	
+ 	<update  id="updatekey"  parameterType="java.lang.String"  >
+		UPDATE T_JOB_EXEC_DETAIL 
+			 SET END_TIME = now(),
+			 	 SUCCESS_FLAG = '1',
+			 	 LOG_INFO = '执行成功' 
+		 WHERE UUID = #{key}
+ 	</update>
+ 	
+ 	<update  id="updatekey1"  parameterType="java.lang.String"  >
+		UPDATE T_JOB_EXEC_DETAIL 
+		   SET END_TIME = now(),
+		   	 SUCCESS_FLAG = '0',
+		   	 LOG_INFO = '执行失败' 
+		 WHERE UUID = #{key}
+ 	</update>
+ 	
+ 	<update  id="updatekey2"  parameterType="java.lang.String"  >
+		UPDATE T_JOB_INFO SET EXEC_FLAG = '0' WHERE JOB_CODE = #{JOB_CODE}
+ 	</update>
+ 	
+ 	<select id="getJOB_CODE" parameterType="java.lang.String" resultType="java.lang.String" >
+    SELECT JOB_CODE
+      FROM T_JOB_INFO RW
+     WHERE RW.JOB_MC = #{UUID}
+    </select>
+
+</mapper>

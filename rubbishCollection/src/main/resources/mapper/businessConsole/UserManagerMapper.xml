@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.sdd.businessConsole.user.dao.IUserManagerDAO">
+	<!-- 获取用户列表 -->
+	<select id="getUsers" parameterType="user" resultType="user">
+		SELECT UUID,
+		       USER_CODE,
+		       ADMIN_FLAG,
+		       USER_NAME,
+		       REMARK,
+		       ID_CARD,
+		       SEX,
+		       TEL,
+		       PHONE,
+		       EMAIL,
+		       IP,
+		       DEPT_CODE
+		  FROM T_SYS_USER
+		 WHERE DEL_FLAG = 0
+		 <if test="USER_NAME != null and USER_NAME != ''">
+		 	AND USER_NAME LIKE '%${USER_NAME}%'
+		 </if>
+		 <if test="SEX != null and SEX != ''">
+		 	AND SEX = #{SEX}
+		 </if>
+		ORDER BY SORT_NO DESC
+	</select>
+	<!-- 获取用户详细信息 -->
+	<select id="getAccountMessage" parameterType="map" resultType="map">
+		SELECT	    U.USER_CODE,
+					U.USER_ACCNT,
+					U.UUID,
+					U.USER_NICK_NAME,
+					U.USER_NAME,	
+					U.ID_CARD,
+					U.SEX,
+					U.TEL,
+					U.IP,
+					U.ADMIN_FLAG,
+					U.PHONE,
+					U.EMAIL,
+					U.PIC_URL,
+					U.REMARK
+			FROM	T_SYS_USER U
+			WHERE   U.DEL_FLAG=0
+			AND		U.USER_CODE = #{USER_CODE}
+	</select>
+	<!-- 获取页面显示的用户的信息 -->
+	<select id="getAccount" parameterType="java.util.Map" resultType="java.util.HashMap">
+			SELECT	U.UUID,
+			        U.USER_CODE,
+					U.USER_ACCNT,
+					U.USER_NICK_NAME,
+					U.USER_NAME,
+					U.ADMIN_FLAG,
+					U.ID_CARD,
+					U.SEX,
+					U.TEL,
+					U.PHONE,
+					U.EMAIL,
+					U.IP,
+					U.REMARK,
+					DATE_FORMAT(U.CREATED_TIME,'%Y-%m-%d %H:%i:%S') CREATED_TIME,
+					U.CREATED_BY,
+					U.SPECIAL_FLAG
+			FROM	T_SYS_USER U
+			WHERE   U.DEL_FLAG=0
+				<if test="USER_NICK_NAME != null and USER_NICK_NAME != ''">
+			   		AND U.USER_NICK_NAME LIKE '%${USER_NICK_NAME}%'
+			   	</if>
+				<if test="USER_ACCNT != null and USER_ACCNT != ''">
+					AND U.USER_ACCNT LIKE '%${USER_ACCNT}%'
+				</if>
+				<if test="USER_NAME != null and USER_NAME != ''">
+					AND U.USER_NAME LIKE '%${USER_NAME}%'
+				</if>
+				<if test="SEX != null and SEX != ''">
+					AND U.SEX = #{SEX}
+				</if>
+				ORDER BY U.CREATED_TIME DESC
+	</select>
+	
+	<!-- 查询用户的数量 -->
+	<select id="countAccount" parameterType="java.util.Map" resultType="int">
+			SELECT	COUNT(1)
+			FROM	T_SYS_USER U
+			WHERE   DEL_FLAG=0
+				<if test="USER_NICK_NAME != null and USER_NICK_NAME != ''">
+			   		AND U.USER_NICK_NAME LIKE '%${USER_NICK_NAME}%'
+			   	</if>
+				<if test="USER_ACCNT != null and USER_ACCNT != ''">
+					AND U.USER_ACCNT LIKE '%${USER_ACCNT}%'
+				</if>
+				<if test="USER_NAME != null and USER_NAME != ''">
+					AND U.USER_NAME LIKE '%${USER_NAME}%'
+				</if>
+				ORDER BY U.CREATED_TIME DESC
+	</select>
+    <!-- 新增用户 -->
+	<insert id="addNewUser" parameterType="map">
+		INSERT INTO T_SYS_USER
+		  (UUID,
+		   USER_CODE,
+		   USER_ACCNT,
+		   USER_NAME,
+		   USER_PWD,
+		   USER_NICK_NAME,
+		   SPECIAL_FLAG,
+		   ADMIN_FLAG,
+		   ID_CARD,
+		   SEX,
+		   TEL,
+		   PHONE,
+		   EMAIL,
+		   PIC_URL,
+		   IP,
+		   SORT_NO,
+		   DEL_FLAG,
+		   REMARK,
+		   CREATED_TIME,
+		   CREATED_BY,
+		   UPDATED_TIME,
+		   UPDATED_BY)
+		VALUES
+		  (#{UUID,jdbcType=VARCHAR},
+		   #{USER_CODE,jdbcType=VARCHAR}, 
+		   #{USER_ACCNT,jdbcType=VARCHAR},
+		   #{USER_NAME,jdbcType=VARCHAR},
+		   #{USER_PWD,jdbcType=VARCHAR},
+		   #{USER_NICK_NAME,jdbcType=VARCHAR},
+		   #{SPECIAL_FLAG,jdbcType=INTEGER},
+		   #{ADMIN_FLAG,jdbcType=VARCHAR}, 
+		   #{ID_CARD,jdbcType=VARCHAR}, 
+		   #{SEX,jdbcType=VARCHAR}, 
+		   #{TEL,jdbcType=VARCHAR}, 
+		   #{PHONE,jdbcType=VARCHAR}, 
+		   #{EMAIL,jdbcType=VARCHAR}, 
+		   #{PIC_URL,jdbcType=VARCHAR}, 
+		   #{IP,jdbcType=VARCHAR}, 
+		   #{SORT_NO,jdbcType=INTEGER}, 
+		   0, 
+		   #{REMARK,jdbcType=VARCHAR}, 
+		   NOW(), 
+		   #{YHMC,jdbcType=VARCHAR}, 
+		   NOW(), 
+		   #{YHMC,jdbcType=VARCHAR})
+	</insert>	
+    <!-- 获取用户额外菜单的菜单代码 -->
+	<select id="getUserAdditionMenu" resultType="java.lang.String" >
+        SELECT MENU_CODE ID FROM T_SYS_USER_MENU_EXTRA WHERE USER_CODE = #{USER_CODE}
+    </select>
+    
+     <!-- 删除用户额外菜单 -->
+   	<delete id="deleteUserAdditionMenu">
+		DELETE FROM T_SYS_USER_MENU_EXTRA WHERE USER_CODE = #{USER_CODE}
+   	</delete>
+   	
+   	 <!-- 新增用户额外菜单 -->
+	<insert id="addUserAdditionMenu" parameterType="java.util.HashMap">
+		INSERT INTO T_SYS_USER_MENU_EXTRA
+	        	(UUID, USER_CODE, MENU_CODE, START_TIME, END_TIME, CREATED_TIME, CREATED_BY, SORT_NO, DEL_FLAG, UPDATED_TIME, UPDATED_BY)
+	        VALUES  
+		<foreach collection="MENU_CODE" item="tag"  index="index" open="" close="" separator="," >
+				(UUID(), #{USER_CODE}, #{tag}, #{start}, #{end}, NOW(), #{CREATED_BY}, 0, 0, NOW(), #{CREATED_BY})
+        </foreach>
+    </insert>
+    	
+   	<!-- 更新用户信息 -->
+	<update id="updateAccount" parameterType="map">
+		UPDATE T_SYS_USER
+		   SET USER_NICK_NAME= #{USER_NICK_NAME,jdbcType=VARCHAR},
+		       USER_NAME= #{USER_NAME,jdbcType=VARCHAR},
+		       ID_CARD = #{ID_CARD,jdbcType=VARCHAR},
+		       IP=#{IP,jdbcType=VARCHAR},
+		       SEX = #{SEX,jdbcType=NUMERIC},
+		       EMAIL=#{EMAIL,jdbcType=VARCHAR},
+		       TEL= #{TEL,jdbcType=NUMERIC},
+		       PHONE= #{PHONE,jdbcType=VARCHAR},
+		       ADMIN_FLAG=#{ADMIN_FLAG},
+		       <if test=" null!=PIC_URL and '' !=PIC_URL">
+		       PIC_URL=#{PIC_URL,jdbcType=VARCHAR},
+		       </if>
+		       <if test=" null!=DEPT_CODE and '' !=DEPT_CODE">
+		       DEPT_CODE=#{DEPT_CODE,jdbcType=VARCHAR},
+		       </if>
+		       REMARK=#{REMARK,jdbcType=VARCHAR},
+		       UPDATED_BY= #{YHMC,jdbcType=VARCHAR},
+		       DEL_FLAG=0,
+		       UPDATED_TIME = NOW()
+		 WHERE USER_CODE = #{USER_CODE}
+	</update>
+   	<!-- 修改密码 -->
+   	<update id="modifyUserPwd" parameterType="java.util.HashMap">
+   		UPDATE T_SYS_USER
+		   SET USER_PWD     = #{PWD},
+		       UPDATED_TIME = NOW(),
+		       UPDATED_BY   = #{UPDATED_BY,jdbcType=VARCHAR}
+		 WHERE USER_CODE = #{USER_CODE}
+		 AND DEL_FLAG=0
+   	</update>
+   	
+   	<!-- 修改重置密码 -->
+	<update id="setPassword" parameterType="map">
+		UPDATE T_SYS_USER
+		   SET USER_PWD     = #{PASSWORD},
+		       UPDATED_BY   = #{UPDATED_BY},
+		       UPDATED_TIME = NOW()
+		 WHERE USER_CODE = #{USER_CODE}
+		  AND DEL_FLAG=0
+	</update>
+   	
+   	
+   	<!-- 作废用户 -->
+   	<update id="deleteUsers" parameterType="map">
+   		UPDATE T_SYS_USER
+		   SET DEL_FLAG     = 1,
+		       UPDATED_TIME = NOW(),
+		       UPDATED_BY   = #{UPDATED_BY,jdbcType=VARCHAR}
+		 WHERE USER_CODE IN 
+   		<foreach item="item" index="index" collection="USER_CODES" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+   	</update>
+   	<!-- 作废用户 -->
+   	<update id="deleteAccount" parameterType="java.util.Map">		 
+		UPDATE  T_SYS_USER
+		SET 	UPDATED_BY = #{UPDATED_BY}, 
+		    	DEL_FLAG = 1,
+		    	UPDATED_TIME = NOW()
+		WHERE 	USER_CODE IN 
+		 <foreach collection="USER_CODE" item="tag" index="index" open="("  separator="," close=")">
+		 	 #{tag}
+		 </foreach>
+	</update>
+   	
+   	<!-- p判断用户代码是否存在 -->
+   	<select id="isContainUSER_CODE"  resultType="user">
+		SELECT USER_CODE, USER_NAME, DEL_FLAG,USER_ACCNT
+		  FROM T_SYS_USER
+		 WHERE USER_ACCNT = #{USER_ACCNT}
+	</select>
+	
+	<!-- 判断用户名是否存在 -->
+	<select id="isContainUSER_NAME"  resultType="int">
+		SELECT COUNT(1) FROM T_SYS_USER WHERE USER_NAME = #{USER_NAME}
+	</select>
+    <!-- 查询最大序号的信息 -->
+    <select id="getMaximumSortNo"  resultType="map">
+      SELECT MAX(SORT_NO) SORT_NO 
+        FROM T_SYS_USER
+    </select>
+    
+      <!-- 查询用户部门最大序号的信息 -->
+     <select id="getMaximumSortNoInDept"  resultType="map">
+      SELECT MAX(SORT_NO) SORT_NO 
+        FROM T_SYS_USER
+    </select>
+    
+    <!-- 查询的所有小区 -->
+    <select id="getArea" parameterType="map" resultType="map">
+         <!-- SELECT
+              AREA_CODE,
+              AREA_NAME
+         FROM
+              T_CODE_SYNC_AREA A,
+              T_SYS_USER_DEPT D,
+       		  T_SYS_DEPT DV
+         WHERE
+              A.DEL_FLAG=0
+          AND D.DEL_FLAG=0
+          AND DV.DEL_FLAG=0
+          AND D.USER_CODE=#{YHMC}
+          AND A.DEPT_CODE=D.DEPT_CODE
+          AND DV.DEPT_CODE = D.DEPT_CODE      
+         <if test="null!=AREA_NAME and ''!=AREA_NAME">
+          AND AREA_NAME LIKE '%${AREA_NAME}%'
+         </if> -->
+         SELECT
+			A.AREA_CODE,
+			A.AREA_NAME
+		FROM
+			T_CODE_SYNC_AREA A,
+			T_SYS_USER_DEPT D
+		WHERE
+			A.AREA_CODE = D.DEPT_CODE
+		AND D.AREA_FLAG = 1
+		AND A.DEL_FLAG = 0
+		AND D.DEL_FLAG = 0
+		AND D.USER_CODE = #{YHMC}
+		<if test="null!=AREA_NAME and ''!=AREA_NAME">
+        	AND A.AREA_NAME LIKE CONCAT(CONCAT('%', #{AREA_NAME}), '%')
+        </if>
+    </select>
+    
+    <!--查询和小区关联的岗位  -->
+    <select id="getAllStationByArea" parameterType="String" resultType="station">
+        SELECT
+           T.PARENT_POST_CODE,
+           T.POST_CODE,
+           P.POST_NAME
+        FROM
+           T_SYS_AREA_POST T,
+           T_SYS_POST P
+        WHERE
+           T.POST_CODE=P.POST_CODE
+        AND  T.DEL_FLAG=0
+        AND  T.AREA_CODE=#{AREA_CODE}
+    </select>
+    
+    <!-- 查询用户在小区下的岗位 -->
+    <select id="getUserstation" parameterType="String" resultType="String">
+        SELECT
+           T.POST_CODE
+        FROM
+           T_SYS_USER_POST T
+        WHERE
+             T.DEL_FLAG=0
+        AND  T.USER_CODE=#{USER_CODE}
+        AND  T.AREA_CODE=#{AREA_CODE}
+    </select>
+    <!-- 删除用户岗位 -->
+    <delete id="deleteUsersStation" parameterType="String">
+       DELETE FROM T_SYS_USER_POST WHERE USER_CODE=#{USER_CODE} AND AREA_CODE=#{AREA_CODE}
+    </delete>
+    
+    <insert id="addUserStations" parameterType="java.util.HashMap">
+    	    INSERT INTO T_SYS_USER_POST
+	        	(UUID, USER_CODE,AREA_CODE, POST_CODE, CREATED_TIME, CREATED_BY,SORT_NO,DEL_FLAG,UPDATED_TIME,UPDATED_BY)
+	        VALUES  
+				(#{UUID}, #{USER_CODE}, #{AREA_CODE}, #{POST_CODE}, NOW(), #{YHMC},0,0,NOW(),#{YHMC})
+    </insert>
+    
+    <!-- 更新用户表中岗位信息 -->
+    <update id="updateUserStation" parameterType="map">
+          UPDATE  T_SYS_USER
+		  SET 	UPDATED_BY = #{YHMC}, 
+		        POST_CODE=#{POST_CODE},
+		    	UPDATED_TIME = NOW()
+		WHERE 	USER_CODE =#{USER_CODE}
+		AND     DEL_FLAG=0
+    </update>
+    
+    <!-- 获取某个小区下的跟部门代码 -->
+    <select id="getStationRoot" parameterType="String" resultType="String">
+       SELECT DISTINCT POST_CODE FROM T_SYS_AREA_POST
+       WHERE POST_CODE=PARENT_POST_CODE
+       AND AREA_CODE=#{AREA_CODE}
+       AND DEL_FLAG=0
+    </select>
+    
+    <!-- 获取用户所在的部门 -->
+    <select id="getAreaDepart" parameterType="String" resultType="int">
+       SELECT COUNT(1) NUM
+       FROM T_SYS_USER_DEPT
+       WHERE USER_CODE=#{USER_CODE}
+       AND DEL_FLAG=0
+    </select>
+    <!-- 所有项目-->
+	<select id="getAllProject" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT CONCAT(B.REGION_NAME,"-",A.PROJECT_NAME) AS PROJECT_NAME,
+			   A.PROJECT_CODE AS PROJECT_CODE,
+			   A.UUID
+		FROM T_CODE_PROJECT A,T_CODE_REGION B
+		WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0
+			AND A.REGION_CODE = B.REGION_CODE
+	</select>
+	<!-- 用户管理-设置项目 -->
+    <insert id="addUserProject" parameterType="java.util.HashMap">
+		INSERT INTO T_SYS_USER_PROJECT (
+			USER_CODE,
+			PROJECT_CODE,
+			VERSION,
+			DEL_FLAG,
+			UUID,
+			SORT_NO,
+			CREATED_TIME,
+			CREATED_BY,
+			UPDATED_TIME,
+			UPDATED_BY
+		)VALUES
+		<foreach collection="projectList" item="tag" index="index" open="" close="" separator=",">
+		 (
+			#{USER_CODE,jdbcType=VARCHAR},
+			#{tag.PROJECT_CODE,jdbcType=VARCHAR},
+			0,
+			0,
+			#{tag.UUID},
+			0,
+			NOW(),
+			#{CREATED_BY,jdbcType=VARCHAR},
+			NOW(),
+			#{CREATED_BY,jdbcType=VARCHAR}
+		)</foreach>
+		
+    </insert>
+    <delete id="deleteUserProject" parameterType="map">
+        DELETE
+		FROM
+			T_SYS_USER_PROJECT
+		WHERE
+		USER_CODE = #{USER_CODE}
+    </delete>
+</mapper>
+

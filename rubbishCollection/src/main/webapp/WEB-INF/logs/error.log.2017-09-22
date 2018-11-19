@@ -1,0 +1,6 @@
+2017-09-22 14:51:16 [ http-8080-5:981536 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.platformData.customerManage.controller.CustomerManageController --> getAllCustomer() Exception : org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException
+2017-09-22 16:17:47 [ http-8080-1:50489 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.opUnitManage.controller.OpUnitManageController --> getOrgPostList() Exception : org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException

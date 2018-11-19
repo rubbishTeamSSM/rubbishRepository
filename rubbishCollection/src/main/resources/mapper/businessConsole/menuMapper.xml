@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.businessConsole.menu.dao.MenuDAO">
+	
+	<select id="getMenuDetail" resultType="menu">
+		SELECT
+			MENU_CODE,
+			MENU_NAME,
+			IFNULL(MENU_URL, '') MENU_URL,
+			PARENT_MENU_CODE,
+			TYPE,
+			SORT_NO,
+			IFNULL(REMARK, '') REMARK
+		FROM
+			T_SYS_MENU
+		WHERE
+			MENU_CODE = #{MENU_CODE}
+	</select>
+	
+	<!-- 额外菜单有效时间限制 -->
+	<select id="getUserMenu" resultType="menu" parameterType="map">
+		SELECT DISTINCT A.MENU_CODE,
+		                A.MENU_NAME,
+		                A.MENU_URL,
+		                A.PARENT_MENU_CODE,
+		                A.TYPE,
+		                A.SORT_NO,
+		                A. LEVEL
+		  FROM T_SYS_MENU A, T_SYS_ROLE_MENU B, T_SYS_USER_ROLE C
+		 WHERE A.MENU_CODE = B.MENU_CODE
+		   AND B.ROLE_CODE = C.ROLE_CODE
+		   AND C.USER_CODE = #{userId}
+		   AND A.PARENT_MENU_CODE = #{menuPId}
+		   AND A.DEL_FLAG = 0
+		   AND A. LEVEL = #{LEVEL}
+		UNION
+		SELECT C.MENU_CODE,
+		       C.MENU_NAME,
+		       C.MENU_URL,
+		       C.PARENT_MENU_CODE,
+		       C.TYPE,
+		       C.SORT_NO,
+		       C. LEVEL
+		  FROM T_SYS_MENU C, T_SYS_USER_MENU_EXTRA D
+		 WHERE C.MENU_CODE = D.MENU_CODE
+		   AND D.USER_CODE = #{userId}
+		   AND C.PARENT_MENU_CODE = #{menuPId}
+		   AND C.DEL_FLAG = 0
+		   AND C. LEVEL = #{LEVEL}
+		   AND DATE_FORMAT(D.START_TIME, '%Y-%m-%d') &lt;= DATE_FORMAT(NOW(), '%Y-%m-%d')
+		   AND DATE_FORMAT(D.END_TIME, '%Y-%m-%d') >= DATE_FORMAT(NOW(), '%Y-%m-%d')
+		 ORDER BY SORT_NO ASC
+		<!-- (SELECT
+			A.MENU_CODE,
+			A.MENU_NAME,
+			A.MENU_URL,
+			A.PARENT_MENU_CODE,
+			A.TYPE,
+			A.SORT_NO,
+			A. LEVEL
+		FROM
+			T_SYS_MENU A,
+			T_SYS_ROLE_MENU B
+		WHERE
+			A.MENU_CODE = B.MENU_CODE
+		AND B.ROLE_CODE = #{roleId}
+		AND A.PARENT_MENU_CODE = #{menuPId}
+		AND A.DEL_FLAG = 0
+		AND A. LEVEL = #{LEVEL})
+		UNION
+			(SELECT
+				C.MENU_CODE,
+				C.MENU_NAME,
+				C.MENU_URL,
+				C.PARENT_MENU_CODE,
+				C.TYPE,
+				C.SORT_NO,
+				C. LEVEL
+			FROM
+				T_SYS_MENU C,
+				T_SYS_USER_MENU_EXTRA D
+			WHERE
+				C.MENU_CODE = D.MENU_CODE
+			AND D.USER_CODE = #{userId}
+			AND C.PARENT_MENU_CODE = #{menuPId}
+			AND C.DEL_FLAG = 0
+			AND C. LEVEL = #{LEVEL}
+			AND DATE_FORMAT(D.START_TIME, '%Y-%m-%d') &lt;= DATE_FORMAT(NOW(), '%Y-%m-%d')
+			AND DATE_FORMAT(D.END_TIME, '%Y-%m-%d') >= DATE_FORMAT(NOW(), '%Y-%m-%d'))
+		ORDER BY SORT_NO ASC -->
+	</select>
+	
+	
+	<select id="getSystemMenu" resultType="menu">
+		SELECT F.UUID,F.MENU_CODE,F.MENU_NAME,F.MENU_URL,F.TYPE,F.PARENT_MENU_CODE 
+		  FROM T_SYS_MENU F
+		 WHERE F.PARENT_MENU_CODE = #{pid}
+		   AND F.DEL_FLAG = '0'
+		ORDER BY F.SORT_NO DESC
+	</select>
+	
+	<select id="getMaxChildrenSORT_NO" resultType="java.lang.String">
+		SELECT MAX(SORT_NO) maxChildrenSORT_NO FROM T_SYS_MENU WHERE PARENT_MENU_CODE = #{PARENT_MENU_CODE}
+	</select>
+	
+	<insert id="addNewMenu" parameterType="menu">
+		INSERT INTO T_SYS_MENU 
+		(UUID,MENU_CODE,MENU_NAME,MENU_URL,
+		PARENT_MENU_CODE,TYPE,SORT_NO,DEL_FLAG,REMARK,
+		CREATED_TIME,CREATED_BY,LEVEL,AUTH_CODE,
+		UPDATED_TIME,
+		UPDATED_BY)
+		VALUES(
+		#{UUID,jdbcType=VARCHAR},
+		#{MENU_CODE,jdbcType=VARCHAR},
+		#{MENU_NAME,jdbcType=VARCHAR},
+		#{MENU_URL,jdbcType=VARCHAR},
+		#{PARENT_MENU_CODE,jdbcType=VARCHAR},
+		#{TYPE,jdbcType=VARCHAR},
+		#{SORT_NO,jdbcType=NUMERIC},
+		#{DEL_FLAG,jdbcType=VARCHAR},
+		#{REMARK,jdbcType=VARCHAR},
+		now(),
+		#{CREATED_BY,jdbcType=VARCHAR},
+		#{LEVEL,jdbcType=NUMERIC},
+		#{AUTH_CODE,jdbcType=VARCHAR},
+		now(),
+		#{CREATED_BY,jdbcType=VARCHAR})
+	</insert>
+	<!-- 新增子菜单，更新父级菜单类型为目录 -->
+	<update id="updateParentType" parameterType="menu">
+		UPDATE T_SYS_MENU
+		SET TYPE = 2,
+		 UPDATED_TIME = NOW(),
+		 UPDATED_BY = #{CREATED_BY}
+		WHERE
+			DEL_FLAG = 0
+		AND MENU_CODE = #{PARENT_MENU_CODE}
+	</update>
+	<select id="getAllMenu" resultType="menu">
+        SELECT
+			MENU_CODE,
+			MENU_NAME,
+			PARENT_MENU_CODE,
+			AUTH_CODE,
+			TYPE,
+			LEVEL
+		FROM
+			T_SYS_MENU
+		WHERE
+			DEL_FLAG = 0
+		ORDER BY
+			SORT_NO
+    </select>
+    
+    <delete id="deleteUsersAdditionMenu">
+    	DELETE FROM T_SYS_USER_MENU_EXTRA WHERE USER_CODE IN 
+    	 <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		      #{item}  
+		 </foreach>
+    </delete>
+    
+    <update id="modifyMenu" parameterType="menu">
+    	UPDATE T_SYS_MENU 
+    	SET MENU_NAME = #{MENU_NAME,jdbcType=VARCHAR},
+    		TYPE = #{TYPE,jdbcType=VARCHAR},
+    		MENU_URL =#{MENU_URL,jdbcType=VARCHAR},
+    		SORT_NO =#{SORT_NO,jdbcType=NUMERIC},
+    		REMARK = #{REMARK,jdbcType=VARCHAR},
+    		UPDATED_TIME = NOW(),
+    		UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR}
+    	WHERE MENU_CODE = #{MENU_CODE}
+    </update>
+    
+    
+    <update id="deleteMenu" parameterType="menu">
+     UPDATE T_SYS_MENU 
+     SET DEL_FLAG = 1,
+         UPDATED_TIME = NOW(),
+    	 UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR}  
+     WHERE MENU_CODE IN
+     <foreach item="item" index="index" collection="MENU_CODES" open="(" separator="," close=")">  
+	      #{item}  
+	 </foreach>
+    </update>
+    
+    <delete id="deleteRoleMenu">
+      DELETE FROM T_SYS_ROLE_MENU WHERE MENU_CODE IN
+      <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+	      #{item}  
+	 </foreach>
+    </delete>
+    
+    <delete id="deleteAdditionMenu">
+     DELETE FROM T_SYS_USER_MENU_EXTRA WHERE MENU_CODE IN
+     <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+	      #{item}  
+	 </foreach>
+    </delete>
+    
+    <select id="getAuthCode" resultType="string" parameterType="menu">
+      SELECT
+			CASE
+		WHEN COUNT(1) > 0 THEN
+			CONCAT(
+				#{PARENT_AUTH_CODE},
+				LPAD(
+					SUBSTR(
+						MAX(AUTH_CODE)
+						FROM
+							LENGTH(AUTH_CODE) - 2 FOR LENGTH(AUTH_CODE)
+					) + 1,
+					3,
+					0
+				)
+			)
+		ELSE
+			CONCAT(
+				#{PARENT_AUTH_CODE},
+				'000'
+			)
+		END AUTH_CODE
+		FROM
+			T_SYS_MENU 
+		WHERE
+			PARENT_MENU_CODE = #{PARENT_MENU_CODE}
+    </select>
+    <!-- 查询是否含有其他子菜单 -->
+	<select id="getIfHaveChild" parameterType="menu" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			T_SYS_MENU
+		WHERE
+			DEL_FLAG = 0
+		AND PARENT_MENU_CODE = #{PARENT_MENU_CODE}
+	</select>
+	<!-- 更新父级类型为菜单 -->
+	<update id="updateParentTypes" parameterType="menu">
+		UPDATE T_SYS_MENU
+		SET TYPE = 1,
+		 UPDATED_TIME = NOW(),
+		 UPDATED_BY = #{UPDATED_BY}
+		WHERE
+			DEL_FLAG = 0
+		AND MENU_CODE = #{PARENT_MENU_CODE}
+	</update>
+</mapper>

@@ -1,0 +1,125 @@
+#div1{ width:44.5%; height:0px; border:black 1px dashed; float:left;}
+#div2{ width:44.5%; height:0px; border:black 1px dashed; float:left;}
+#div3{ float:left; height:5px; line-height:5px; margin:0px 10px;}
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	color:#333333;
+	border-width: 1px;
+	border-color: #AED0EA;
+	border-collapse: collapse;
+	padding-left:20px;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #AED0EA;
+	background-color: #AED0EA;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 12px 8px 8px 13px;
+	border-style: solid;
+	border-color:#AED0EA;
+	background-color: #ffffff;
+}
+
+
+/* 
+* 2017-06-27 chh 
+**/
+.boot-title {    
+	padding: 10px;
+    line-height: 15px;
+    color: #434343;
+    font-weight: bold;
+    font-size: 13px;
+    background: #e7e9e8;
+    position: relative;
+    border: 1px solid #e8e8e8;
+}
+.bg_ff {background-color: #fff !important;}
+
+/*
+*	2017-06-29 ch 修改新增、修改页面基本信息类table的自适应问题
+**/
+.clr::after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+.clr {
+	*zoom: 1;
+}
+.label-ch-w100 { 
+	width:105px;
+	display:inline-block; 
+	line-height:24px; 
+	text-align:right; 
+	float:left;
+}
+.label-ch-w160 { 
+	width:180px;
+	display:inline-block; 
+	line-height:24px; 
+	text-align:right; 
+	float:left;
+}
+.label-ch-w140 { 
+	width:150px;
+	display:inline-block; 
+	line-height:24px; 
+	text-align:right; 
+	float:left;
+}
+.inp_w120 { 
+	width:120px !important;
+	float:left;
+	height:24px;
+	}
+.inp_w160 { 
+	width:160px !important;
+	float:left;
+	height:24px;
+	}
+.inp_w80 { width:80px !important; float:left; height:24px;}
+.inp_w100 { width:100px !important; float:left; height:24px;}
+.table-ch-add {width:100%;}
+.table-ch-add td { padding:0 0 12px 0 !important;}
+.table-ch-add td .combo { float:left;}
+.text-w360 { width:350px; float:left;}
+@media ( max-width: 1024px ){
+ 	.inp_w120 { width:120px !important;}
+ 	.text-w360 { width:340px; float:left;}
+ 	.table-ch-three .inp_w120,.inp_w150 { width:150px !important;}
+ 	.table-ch-three .text-w360 { width:380px; float:left;}
+ 	.inp_w80 { width:80px !important;}
+ 	.inp_w100 { width:100px !important;}
+}
+@media ( min-width: 1280px ) and ( max-width:1359px ){
+ 	.inp_w120 { width:175px !important;}
+ 	.text-w360 { width:450px; float:left;}
+ 	.table-ch-three .inp_w120,.inp_w150 { width:230px !important;}
+ 	.table-ch-three .text-w360 { width:600px; float:left;}
+ 	.inp_w80 { width:110px !important;}
+ 	.inp_w100 { width:142px !important;}
+ }
+@media ( min-width: 1360px ){
+ 	.inp_w120 { width:210px !important;}
+ 	.text-w360 { width:518px; float:left;}
+ 	.table-ch-three .inp_w120,.inp_w150 { width:260px !important;}
+ 	.table-ch-three .text-w360 { width:660px; float:left;}
+ 	.inp_w80 { width:125px !important;}
+ 	.inp_w100 { width:167px !important;}
+ }
+/*
+* End 2017-06-29
+**/
+/* table ͼƬ ����  */
+.img-ch-new-h {height:14px;width:14px; line-height:14px; float:left; margin-top:2px; margin-right:6px; display:inline;}
+input[type=radio],input[type=checkbox] { border:none; height:auto;}
+.text-w360 { font-size:12px !important;}
+.tab_td_rg {text-align:right; padding-right:10px;}
+

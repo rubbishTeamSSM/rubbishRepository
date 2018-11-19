@@ -1,0 +1,57 @@
+body{
+	background:#fff;
+}
+.cockpit-title{
+	height:15px;
+	line-height:15px;
+	text-align:center;
+	padding-top:15px;
+}
+.cockpit-title span.cockpit-nav{
+  display:inline-block;
+  width:39%;
+  border-top:1px solid #f2f2f2;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+.cockpit-title span.cockpit-word{
+  color: #888;
+}
+.combo{
+	border: 1px solid #00cdce;
+    margin: 0;
+    margin-top: -3px;
+}
+.cockpit-detail-con{
+	position:relative;
+	display:none;
+}
+.cockpit-detail-con .images-left{
+	position:absolute;
+	width:15px;
+	height:20px;
+	left:20px;
+	bottom:40px;
+	cursor:pointer;
+}
+.cockpit-detail-con  .images-right{
+	position:absolute;
+	width:15px;
+	height:20px;
+	right:10px;
+	bottom:40px;
+	cursor:pointer;
+}
+.cockpit-detail-con .cockpit-detail-btn{
+	padding-left:20px;
+	padding-top:20px;
+	height:30px;
+	
+}
+.cockpit-detail-con .cockpit-detail-btn a{
+	background:#00cdce;
+	color:#fff;
+	border-radius:3px;
+	padding:3px 15px;
+	font-size:13px;
+}

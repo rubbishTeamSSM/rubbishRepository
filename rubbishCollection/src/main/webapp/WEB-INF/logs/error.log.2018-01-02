@@ -1,0 +1,23 @@
+2018-01-02 12:18:39 [ http-8080-5:10953098 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.workOrderManage.myTasks.controller.MyTasksController  --> getPostListByAreaCode() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 48,505 milliseconds ago.  The last packet sent successfully to the server was 18,910 milliseconds ago.
+2018-01-02 12:18:58 [ http-8080-5:10972037 ] - [ ERROR ] ==异常通知异常==
+2018-01-02 12:18:58 [ http-8080-5:10972039 ] - [ ERROR ] 异常信息:Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 207,163 milliseconds ago.  The last packet sent successfully to the server was 18,901 milliseconds ago.
+2018-01-02 12:19:09 [ http-8080-1:10983057 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.workOrderManage.myTasks.controller.MyTasksController  --> getPostListByAreaCode() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 228,541 milliseconds ago.  The last packet sent successfully to the server was 18,899 milliseconds ago.
+2018-01-02 13:26:40 [ http-8080-1:15033602 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.workOrderManage.myTasks.controller.MyTasksController  --> getPostListByAreaCode() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 48,515 milliseconds ago.  The last packet sent successfully to the server was 18,908 milliseconds ago.
+2018-01-02 13:26:56 [ http-8080-4:15049705 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.businessConsole.role.controller.RoleController --> getRoleMenuButton() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 154,706 milliseconds ago.  The last packet sent successfully to the server was 18,906 milliseconds ago.
+2018-01-02 13:26:59 [ http-8080-1:15052532 ] - [ ERROR ] ==异常通知异常==
+2018-01-02 13:26:59 [ http-8080-1:15052533 ] - [ ERROR ] 异常信息:Could not open JDBC Connection for transaction; nested exception is com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 304,800 milliseconds ago.  The last packet sent successfully to the server was 18,907 milliseconds ago.
+2018-01-02 13:28:24 [ http-8080-2:53146 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.businessConsole.login.controller.LoginCntroller  --> getLoginUser() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: An attempt by a client to checkout a Connection has timed out.
+2018-01-02 13:28:24 [ http-8080-2:53161 ] - [ ERROR ] ==异常通知异常==
+2018-01-02 13:28:24 [ http-8080-2:53165 ] - [ ERROR ] 异常信息:null

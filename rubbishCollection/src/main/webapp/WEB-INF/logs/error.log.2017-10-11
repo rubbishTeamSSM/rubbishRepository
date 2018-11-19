@@ -1,0 +1,48 @@
+2017-10-11 16:28:49 [ http-8080-4:243249 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:28:49 [ http-8080-4:243294 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:28:49 [ http-8080-4:243296 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:28:56 [ http-8080-1:250447 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:28:56 [ http-8080-1:250448 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:28:56 [ http-8080-1:250449 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:29:27 [ http-8080-3:280734 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:29:27 [ http-8080-3:280734 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:29:27 [ http-8080-3:280735 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:29:36 [ http-8080-2:290251 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:29:36 [ http-8080-2:290251 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:29:36 [ http-8080-2:290251 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:30:48 [ http-8080-3:362178 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:30:48 [ http-8080-3:362179 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:30:48 [ http-8080-3:362179 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:45:16 [ http-8080-2:1229850 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:45:16 [ http-8080-2:1229851 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:45:16 [ http-8080-2:1229851 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:45:59 [ http-8080-5:1272921 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:45:59 [ http-8080-5:1272922 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:45:59 [ http-8080-5:1272922 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:52:24 [ http-8080-1:1657930 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:52:24 [ http-8080-1:1657932 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:52:24 [ http-8080-1:1657932 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:53:17 [ http-8080-2:15692 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:53:17 [ http-8080-2:15696 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:53:17 [ http-8080-2:15698 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:56:05 [ http-8080-2:54951 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:56:05 [ http-8080-2:54959 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:56:05 [ http-8080-2:54961 ] - [ ERROR ] 异常信息:null
+2017-10-11 16:59:45 [ http-8080-1:21195 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 16:59:45 [ http-8080-1:21198 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 16:59:45 [ http-8080-1:21200 ] - [ ERROR ] 异常信息:null
+2017-10-11 17:13:02 [ http-8080-2:62996 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 17:13:02 [ http-8080-2:63000 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 17:13:02 [ http-8080-2:63002 ] - [ ERROR ] 异常信息:null
+2017-10-11 17:13:12 [ http-8080-2:73567 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 17:13:12 [ http-8080-2:73567 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 17:13:12 [ http-8080-2:73568 ] - [ ERROR ] 异常信息:null
+2017-10-11 17:17:17 [ http-8080-2:19012 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 17:17:17 [ http-8080-2:19016 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 17:17:17 [ http-8080-2:19018 ] - [ ERROR ] 异常信息:null
+2017-10-11 17:17:24 [ http-8080-3:25908 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.apache.ibatis.builder.IncompleteElementException: Could not find result map com.neusoft.sdd.systemSetting.setManage.dao.ISetManageDao.map
+2017-10-11 17:17:24 [ http-8080-3:25909 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 17:17:24 [ http-8080-3:25909 ] - [ ERROR ] 异常信息:null
+2017-10-11 17:24:24 [ http-8080-2:33995 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.LoginUserController  --> getLoginUser() Exception : org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: An attempt by a client to checkout a Connection has timed out.
+2017-10-11 17:24:24 [ http-8080-2:34000 ] - [ ERROR ] ==异常通知异常==
+2017-10-11 17:24:24 [ http-8080-2:34003 ] - [ ERROR ] 异常信息:null

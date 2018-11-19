@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.businessConsole.station.dao.StationDAO">
+	
+    <select id="getUserGws" resultType="java.lang.String">
+        SELECT POST_CODE FROM T_SYS_USER_POST WHERE USER_CODE = #{USER_CODE}
+    </select>
+
+    <select id="getBmStations" resultType="station">
+        SELECT UUID, POST_CODE, POST_NAME, POST_NAME_J, DEPT_CODE,SORT_NO FROM T_SYS_POST WHERE DEPT_CODE = #{DEPT_CODE}
+    </select>
+    
+	<!-- 获取岗位列表 -->
+	<select id="getStations" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT	P.POST_CODE,
+				P.POST_NAME,
+				P.POST_NAME_J,
+				P.IS_QUALITY,
+				P.IS_400SERVICE,
+				P.SORT_NO,
+				P.LIMIT_TIME,
+				DATE_FORMAT(P.CREATED_TIME,'%Y-%m-%d %H:%i:%S') CREATED_TIME,
+				S.USER_NAME CREATED_BY
+		FROM	T_SYS_POST P
+		LEFT JOIN T_SYS_USER S ON P.CREATED_BY = S.USER_CODE
+		WHERE	P.DEL_FLAG = 0
+		 <if test="POST_NAME != null and POST_NAME != ''">
+		 	AND POST_NAME LIKE CONCAT(CONCAT('%',#{POST_NAME}),'%')
+		 </if>
+		 <if test="IS_QUALITY != null and IS_QUALITY != ''">
+		 	AND IS_QUALITY = #{IS_QUALITY}
+		 </if>
+		 <if test="IS_400SERVICE != null and IS_400SERVICE != ''">
+		 	AND IS_400SERVICE = #{IS_400SERVICE}
+		 </if>
+		 ORDER BY P.CREATED_TIME DESC
+	</select>
+	
+	<select id="validStation" resultType="int">
+        SELECT COUNT(1) FROM T_SYS_POST WHERE POST_NAME = #{POST_NAME} AND POST_CODE != #{POST_CODE} AND DEL_FLAG = 0
+    </select>
+    
+    <select id="validService" resultType="int">
+        SELECT COUNT(1) FROM T_SYS_POST WHERE IS_400SERVICE = 0 AND DEL_FLAG = 0 AND POST_CODE != #{POST_CODE}
+    </select>
+	
+	<insert id="insertStation"  parameterType="java.util.Map">
+		INSERT INTO T_SYS_POST
+					(POST_CODE,
+					POST_NAME,
+					POST_NAME_J,
+					LIMIT_TIME,
+					IS_QUALITY,
+					IS_400SERVICE,
+					DEL_FLAG,
+					UUID,
+					SORT_NO,
+					CREATED_TIME,
+					CREATED_BY,
+					UPDATED_TIME,
+					UPDATED_BY)
+		VALUES
+					(#{POST_CODE,jdbcType=VARCHAR},
+					#{POST_NAME,jdbcType=VARCHAR},
+					#{POST_NAME_J,jdbcType=VARCHAR},
+					#{LIMIT_TIME,jdbcType=VARCHAR},
+					#{IS_QUALITY,jdbcType=VARCHAR},
+					#{IS_400SERVICE,jdbcType=VARCHAR},
+					0,
+					#{UUID,jdbcType=VARCHAR},
+					0,
+					NOW(),
+					#{CREATED_BY,jdbcType=VARCHAR},
+					NOW(),
+					#{CREATED_BY,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="stationDetails" resultType="java.util.Map">
+		SELECT	P.POST_CODE,
+				P.POST_NAME,
+				P.POST_NAME_J,
+				P.IS_QUALITY,
+				P.IS_400SERVICE,
+				LIMIT_TIME
+		FROM	T_SYS_POST P
+		WHERE POST_CODE = #{POST_CODE}
+	</select>
+	
+	<update id="modifyStation" parameterType="java.util.Map">
+    	UPDATE T_SYS_POST
+		   SET POST_NAME = #{POST_NAME,jdbcType=VARCHAR}, 
+		       POST_NAME_J = #{POST_NAME_J,jdbcType=VARCHAR}, 
+		       LIMIT_TIME = #{LIMIT_TIME,jdbcType=VARCHAR},
+		       IS_QUALITY = #{IS_QUALITY,jdbcType=VARCHAR}, 
+		       IS_400SERVICE = #{IS_400SERVICE,jdbcType=VARCHAR},
+	    	   UPDATED_TIME = NOW(),
+	    	   UPDATED_BY = #{UPDATED_BY,jdbcType=VARCHAR}
+		 WHERE POST_CODE = #{POST_CODE}
+    </update>
+    
+    <update id="deleteStation" parameterType="java.util.Map">
+    	UPDATE  T_SYS_POST
+		SET 	UPDATED_BY = #{UPDATED_BY}, 
+		    	DEL_FLAG = 1,
+		    	UPDATED_TIME = NOW()
+		WHERE 	POST_CODE IN 
+		 <foreach collection="POST_CODE" item="tag" index="index" open="(" close=")" separator=",">
+		 	 #{tag}
+		 </foreach>
+    </update>
+	
+	<delete id="deleteUsersSta">
+		DELETE FROM T_SYS_USER_POST WHERE USER_CODE IN
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+	      #{item}  
+	   </foreach>
+	</delete>
+	
+	<insert id="addUserStations" parameterType="java.util.HashMap">
+    	    INSERT INTO T_SYS_USER_POST
+	        	(UUID, USER_CODE, POST_CODE, CREATED_TIME, CREATED_BY,SORT_NO,DEL_FLAG,UPDATED_TIME,UPDATED_BY)
+	        VALUES  
+		<foreach collection="gwds" item="tag"  index="index" open="" close="" separator="," >
+				(UUID(), #{USER_CODE},  #{tag}, NOW(), #{CREATED_BY},0,0,NOW(),#{CREATED_BY})
+        </foreach>
+    </insert>
+    
+    <update id="deleteUserStation" parameterType="java.util.Map">
+    	UPDATE  T_SYS_USER_POST
+		SET 	UPDATED_BY = #{UPDATED_BY}, 
+		    	DEL_FLAG = 1,
+		    	UPDATED_TIME = NOW()
+		WHERE 	POST_CODE IN 
+		 <foreach collection="POST_CODE" item="tag" index="index" open="(" close=")" separator=",">
+		 	 #{tag}
+		 </foreach>
+    </update>
+    
+    <update id="deleteAreaStation" parameterType="java.util.Map">
+    	UPDATE  T_SYS_AREA_POST
+		SET 	UPDATED_BY = #{UPDATED_BY}, 
+		    	DEL_FLAG = 1,
+		    	UPDATED_TIME = NOW()
+		WHERE 	POST_CODE IN 
+		 <foreach collection="POST_CODE" item="tag" index="index" open="(" close=")" separator=",">
+		 	 #{tag}
+		 </foreach>
+    </update>
+    <!-- 获取岗位是否已经被用户关联过 -->
+    <select id="getAllUserPostCount" parameterType="java.util.Map" resultType="int">
+    	SELECT
+			COUNT(1)
+		FROM
+			T_SYS_USER_POST
+		WHERE
+			DEL_FLAG = 0
+		AND POST_CODE IN 
+		<foreach collection="POST_CODE" item="tag" index="index" open="(" close=")" separator=",">
+		 	 #{tag}
+		</foreach>
+    </select>
+    
+    
+</mapper>
+

@@ -1,0 +1,411 @@
+@CHARSET "UTF-8";
+li{
+	list-style:none; 
+}
+*{
+  font-family:"微软雅黑";
+}
+.body-list{
+	background-color: #F3F7F8;
+}
+
+.datagrid-toolbar, #buttonContent{
+	background-color: #F3F7F8!important
+}
+#searchForm{
+	margin-top: 0!important;
+}
+#searchForm table td{
+	text-align:right;
+}
+.developments,.sheetNoteCommitArea{
+	overflow:hidden;
+}
+.item{
+	width: 100%;
+	height: 4px;
+	background-color: #3ac9c3;
+} 
+.areaNoteItem{
+	margin-left:2%;
+	margin-bottom:6px;
+    padding:10px 15px;
+	width: 94%;
+	background-color:#fff;
+	box-shadow:2px 2px 3px #eaeceb;
+}
+.areaNoteItemGray{
+	margin-left:2%;
+	margin-bottom:20px;
+    padding:10px 15px;
+	width: 94%;
+	background-color:#ebebeb;
+	box-shadow:2px 2px 3px #eaeceb;
+}
+.areaNoteItem .areaNoteItemLeft{
+              width: 100%;
+}
+/*清除浮动*/
+.clearfix:after{
+	display: block;
+	height: 0;
+	content: '.';
+	clear:both;
+	visibility: hidden;
+}
+.areaNoteItem .areaNoteItemTitle{
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	font-size: 14px!important;
+	color:black;
+	font-weight:bold;
+	border-bottom: 1px dashed #a1a1a1;
+}
+.areaNoteItem .areaNoteItemInfo{
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	font-size: 12px!important;
+	color: #747474;
+    border-bottom: 1px dashed #a1a1a1;
+}
+.areaNoteItem .areaNoteItemDetail{
+	padding: 5px 0;
+    width: 100%;
+    line-height:20px;
+    font-size: 12px!important;
+    color: #747474;
+}
+.areaNoteItem .areaName{
+	float: left;
+	width: 70%;
+}
+.areaNoteItem .areaName img{
+	margin-right:10px;
+}
+.areaNoteItem .noteInfo{
+    float: right;
+	width: 30%;
+}
+.commitHeader{
+	padding:5px 0;
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	font-size: 14px!important;
+	border-bottom: 1px solid #ddd;
+}
+.commitDetail .commitHearderLeft{
+	float: left;
+	width: 94%;
+}
+.commitDetail .commitHearderRight{
+	float: left;
+	width: 5%;
+	font-size:12px!important;
+	cursor:pointer;
+}
+/*帖子css*/
+.noData{
+	width:100%;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	background:#fff;
+}
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+.developments{
+}
+.development{
+	margin-bottom: 20px;
+	box-shadow: 2px 2px 2px #e1e5e6;
+	background-color:#fff;
+}
+.development .deveTitle{
+	padding:2px 20px;
+	height:30px;
+	line-height:30px;
+	font-size: 15px;
+	font-weight: bold;  
+	border-bottom:1px dashed #ddd;
+}
+.development .devetheme{
+	padding:2px 20px;
+    height:30px; 
+    line-height: 30px;
+    font-size: 12px;
+}
+.development .devetheme img{
+	width: 13px;
+	height: 13px;
+}
+.development .areaName{
+	float: left;
+}
+.development  .postInfo{
+	float: right;
+
+}
+.yellowBorder{
+	width: 100%;
+	height: 4px;
+	background-color: #f9c438;
+}
+.blueBorder{
+	width: 100%;
+	height: 4px;
+	background-color: #37a0fb;
+}
+/*评论区域*/
+.commitDetail .commitArea{
+	width: 100%;
+}
+.commitDetail .commitAreaOutputUrl{
+    width: 10%;
+    height:10px;
+}
+.commitDetail .commitAreaOutputContent{
+    height:25px;
+	width: 90%
+}
+.commitAreaHeader{
+	border-bottom: 1px solid #a1a1a1;
+}
+.commitDetail .commitAreaButton{
+	float: right;
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+    color:#fff;
+    font-size: 12px!important;
+    text-align: center;
+    background-color: #6ec469;
+}
+.sheet_none{
+	margin-left:2%;
+	margin-bottom:5px;
+    padding:10px 15px;
+	width: 94%;
+	font-size:12px!important;
+	background-color:#fff;
+	box-shadow:2px 2px 3px #eaeceb;
+}
+.sheet_commit_none{
+	width:100%;
+	text-align:center;
+}
+.commitDetail{
+	margin-bottom:20px;
+    padding:10px 15px;
+	background-color:#fff;
+	box-shadow:2px 2px 3px #eaeceb;
+}
+.commitDetailThing{
+	padding: 16px 10px;
+	width: 100%;
+	box-sizing: border-box;
+    background: #fff;
+		}
+.commitHeaderThing{
+		padding-bottom: 10px;
+		width: 100%;
+		box-sizing:border-box; 
+        border-bottom:1px solid #e9eaec;
+		}
+.commitHeader-top{
+	width: 100%;
+	box-sizing: border-box;
+}
+.nowLoginUrl{
+    float:left;
+    margin-right:1%;
+	width: 3%;
+	height: 28px;
+	box-sizing:border-box;
+	
+}
+.commitArea-content-top-commit-top{
+	width:100%;
+}
+#commitContent1{
+  float:left;
+  width:95.5%;
+  height:30px;
+  line-height:30px;
+  border:1px solid #3ac3c9;
+}
+.commitHeader-bottom{
+	width: 100%;
+	font-size:12px!important;
+}
+.commiting{
+	float: right;
+	padding:2px 5px;
+}
+.commiting button{
+	margin:5px 0 0 0;
+	width:80px;
+	height:26px;
+	color:#fff;
+	border:0px;
+	box-sizing:border-box;
+	background-color:#3ac3c9;
+	cursor:pointer;
+}
+.hide{
+	display:none;
+}
+.commitHearderRight img{
+	width:6px;
+	height:9px;
+}
+/*回复东西*/
+.commitContent{
+	padding:16px;
+	width: 100%;
+    font-size:12px!important; 
+	box-sizing:border-box; 
+    border-bottom:1px solid #e9eaec;
+    background-color:#fff;
+}
+.commitContent-left{
+	float: left;
+	width:3%;
+}
+.commitContent-left .commitUrl{
+	padding-left: 5%;
+    width: 30px;
+    height: 30px;
+}
+.commitContent-right{
+	float: left;
+	padding:0 0 0 10px;
+	width: 95%;
+	box-sizing: border-box;
+}
+.commitOther{
+	color:#989898;
+}
+#OWNER_NAME{
+	float: left;
+}
+#COMMITCONTENT{
+    word-break:break-all;
+}
+.commitContent-left{
+	float: left;
+	width:5%;
+	}
+ .commitOtherButtons{
+	float: right;
+}
+.commitOtherButtons .replyButton,.commitOtherButtons .deleteButton{
+	float: left;
+	box-sizing: border-box;
+	padding-right:10px;
+	cursor:pointer;
+}
+.replayArea{
+	margin-top:5px;
+	width: 100%;
+    box-sizing:border-box; 
+    border-bottom:1px solid #e9eaec;
+}
+ .replayHeader{
+ 	width: 95%;
+ 	padding:20px;
+ 	background: #f3f7f8;
+ }
+#replayContent{
+	margin-bottom: 10px;
+	width: 100%;
+	height: 30px;
+	box-sizing: border-box;
+    border-color:#3ac3c9;
+}
+.replayHeader-bottom{
+	width: 100%;
+	font-size:12px!important;
+	box-sizing: border-box;
+}
+.replaying{
+		float: right;
+	}
+.replaying button{
+	border: 0;
+    width: 80px;
+    height: 26px;
+    color: #fff;
+    background: #3ac3c9;
+    cursor:pointer;
+}
+/*评论外部*/
+.areaNoteItem{
+	box-shadow:2px 2px 3px #eaeceb;
+}
+.sheetNoteArea{
+	margin-bottom:10px;
+}
+/*加载更多*/
+.loadMore{
+	margin-left:2%;
+	margin-bottom:5px;
+    padding:10px 15px;
+	width: 94%;
+	height:20px;
+	line-height:20px;
+	font-size:12px!important;
+	text-align:center;
+	background-color:#fff;
+	box-shadow:2px 2px 3px #eaeceb;
+}
+.prew{
+	margin-left:2%;
+	margin-bottom:10px;
+    padding:10px 15px;
+	width: 94%;
+	height:20px;
+	line-height:20px;
+	font-size:12px!important;
+	text-align:center;
+	background-color:#fff;
+	box-shadow:2px 2px 3px #eaeceb;
+}
+.moreCommitImg{
+	position:relative;
+	left:10px;
+	width:6px;
+	height:12px;	
+}
+.deveTitle{
+	margin-left:10px;
+}
+#overflowhidden{
+	width:96%;
+	word-wrap:break-word;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.loadMore,.prew{
+	cursor:pointer;
+	
+}
+/*加载更多*/
+.loadMoreItem{
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	cursor:pointer;
+}
+.loadMoreItem img{
+	width:6px;
+}

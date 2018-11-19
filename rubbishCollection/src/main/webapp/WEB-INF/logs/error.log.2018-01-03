@@ -1,0 +1,16 @@
+2018-01-03 16:39:51 [ http-8080-1:78549 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.questionnaireMgr.controller.QuestionnaireMgrController --> getPublishDeptList() Exception : org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'UD.AREA_FLAG' in 'where clause'
+### The error may exist in file [E:\workspaces\hisense-systemServer\target\classes\mapper\questionnaireMgrMapper\questionnaireMgrMapper.xml]
+### The error may involve com.neusoft.sdd.questionnaireMgr.dao.IQuestionnaireMgrDao.getDeptTreeList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT    D.DEPT_CODE,    D.DEPT_NAME,    D.PARENT_DEPT_CODE   FROM    T_SYS_DEPT D,    T_SYS_USER_DEPT UD   WHERE    D.DEPT_CODE = UD.DEPT_CODE   AND UD.AREA_FLAG = 0   AND D.DEPT_CODE != D.PARENT_DEPT_CODE   AND D.DEL_FLAG = 0   AND UD.DEL_FLAG = 0   AND UD.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'UD.AREA_FLAG' in 'where clause'
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'UD.AREA_FLAG' in 'where clause'
+2018-01-03 16:40:25 [ http-8080-2:112997 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.questionnaireMgr.controller.QuestionnaireMgrController --> getPublishDeptList() Exception : org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'UD.AREA_FLAG' in 'where clause'
+### The error may exist in file [E:\workspaces\hisense-systemServer\target\classes\mapper\questionnaireMgrMapper\questionnaireMgrMapper.xml]
+### The error may involve com.neusoft.sdd.questionnaireMgr.dao.IQuestionnaireMgrDao.getDeptTreeList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT    D.DEPT_CODE,    D.DEPT_NAME,    D.PARENT_DEPT_CODE   FROM    T_SYS_DEPT D,    T_SYS_USER_DEPT UD   WHERE    D.DEPT_CODE = UD.DEPT_CODE   AND UD.AREA_FLAG = 0   AND D.DEPT_CODE != D.PARENT_DEPT_CODE   AND D.DEL_FLAG = 0   AND UD.DEL_FLAG = 0   AND UD.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'UD.AREA_FLAG' in 'where clause'
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'UD.AREA_FLAG' in 'where clause'

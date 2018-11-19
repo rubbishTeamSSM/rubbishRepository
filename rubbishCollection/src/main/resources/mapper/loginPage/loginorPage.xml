@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.mobile.owner.loginPage.dao.ILoginorDAO">
+	
+	<!-- 登录 -->
+    <select id="loginByVcode" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			OWNER_CODE,
+			OWNER_NAME,
+			OWNER_NICK_NAME,
+			PIC_BG_URL,
+			PIC_URL,
+			OWNER_PWD,
+			TEL,
+			PHONE,
+			ID_CARD,
+			SEX,
+			HOUSE_AGREE_FLAG,
+			UUID,
+			UPDATED_BY,
+			REGIS_AGREE_FLAG
+		FROM
+			T_PM_OWNER
+		WHERE
+			locate(#{PHONE}, PHONE) > 0
+		AND DEL_FLAG = 0
+	</select>
+	
+	<!-- 查询该用户下左右的小区 -->
+	<select id="getAllArea" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			C.CITY_CODE,
+			C.CITY_NAME,
+			S.ROOM_CODE,
+			S.ROOM_NAME,
+			S.UNIT_NO,
+			S.FLOOR_NO,
+			B.BUILD_CODE,
+			B.BUILD_NAME,
+			A.AREA_CODE,
+			A.AREA_NAME,
+			D.DEPT_CODE,
+			R.RELATE_FLAG
+		FROM
+			T_PM_OWNER O,
+			T_PM_OWNER_ROOM R,
+			T_CODE_SYNC_ROOM S,
+			T_CODE_SYNC_AREA A,
+			T_CODE_SYNC_BUILD B,
+			T_CODE_SYNC_CITY C,
+			T_SYS_DEPT D
+		WHERE
+			O.OWNER_CODE = R.OWNER_CODE
+		AND R.ROOM_CODE = S.ROOM_CODE
+		AND A.CITY_CODE = C.CITY_CODE
+		AND A.DEPT_CODE = D.DEPT_CODE
+		AND A.AREA_CODE = B.AREA_CODE
+		AND B.BUILD_CODE = S.BUILD_CODE
+		AND PHONE = #{PHONE}
+		AND R.APPROVAL_STATUS = 1
+		AND R.APPROVAL_RESULT = 1
+		AND O.DEL_FLAG = 0
+		AND R.DEL_FLAG = 0
+		AND S.DEL_FLAG = 0
+		AND A.DEL_FLAG = 0
+		AND B.DEL_FLAG = 0
+		AND C.DEL_FLAG = 0
+		AND D.DEL_FLAG = 0
+		ORDER BY
+			A.AREA_CODE,
+			B.BUILD_CODE,
+			S.ROOM_CODE
+	</select>
+	
+	<!-- 新增用户 -->
+	<insert id="addUser" parameterType="java.util.HashMap">
+		INSERT INTO T_PM_OWNER (
+			REGIS_AGREE_FLAG,
+			<!-- REGIS_PROTOCOL_CODE, -->
+			UUID,
+			SORT_NO,
+		    OWNER_CODE,
+		    OWNER_NICK_NAME,
+		    OWNER_NAME,
+			PHONE,
+			OWNER_PWD,
+			PIC_BG_URL,
+			PIC_URL,
+			DEL_FLAG,
+			CREATED_TIME,
+			CREATED_BY,
+			UPDATED_TIME,
+			UPDATED_BY
+		)VALUES(
+			1,
+			<!-- #{REGIS_PROTOCOL_CODE,jdbcType=VARCHAR}, -->
+			#{UUID,jdbcType=VARCHAR},
+			0,
+			#{OWNER_CODE,jdbcType=VARCHAR},
+			#{OWNER_NICK_NAME,jdbcType=VARCHAR},
+			#{OWNER_NICK_NAME,jdbcType=VARCHAR},
+			#{PHONE,jdbcType=VARCHAR},
+			#{OWNER_PWD,jdbcType=VARCHAR},
+			#{PIC_BG_URL,jdbcType=VARCHAR},
+			#{PIC_URL,jdbcType=VARCHAR},
+			0,
+			NOW(),
+			#{OWNER_CODE,jdbcType=VARCHAR},
+			NOW(),
+			#{OWNER_CODE,jdbcType=VARCHAR}
+			)
+	</insert>
+	
+	<!-- 插入协议代码 -->
+	<update id="updateUser" parameterType="java.util.HashMap">
+		UPDATE T_PM_OWNER
+			SET UPDATED_TIME = NOW(),
+		 		UPDATED_BY = #{OWNER_CODE,jdbcType=VARCHAR}, 
+		 		OWNER_PWD = #{OWNER_PWD,jdbcType=VARCHAR}, 
+		 		OWNER_NICK_NAME = #{OWNER_NICK_NAME,jdbcType=VARCHAR},
+				REGIS_AGREE_FLAG = 1
+			WHERE
+				OWNER_CODE = #{OWNER_CODE,jdbcType=VARCHAR}
+	</update>
+
+	 <!-- 查询用户协议 -->
+    <select id="getProtocol" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			PROTOCOL_CODE,
+			PROTOCOL_NAME,
+			CONTENT,
+			UUID
+		FROM
+			T_PM_PROTOCOL
+		WHERE
+			DEL_FLAG = 0
+		AND 
+            PROTOCOL_CODE = #{PROTOCOL_CODE,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 查询市 -->
+	 <select id="getCity" resultType="java.util.HashMap">
+		SELECT
+			CITY_CODE,
+			CITY_NAME
+		FROM
+			T_CODE_SYNC_CITY
+		WHERE 
+			DEL_FLAG=0
+	</select>
+	
+	<!-- 查询小区 -->
+	 <select id="getArea" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			B.CITY_NAME,
+			A.AREA_CODE,
+			A.AREA_NAME,
+			D.DEPT_CODE
+		FROM
+			T_CODE_SYNC_AREA A,
+			T_CODE_SYNC_CITY B,
+			T_SYS_DEPT D
+		WHERE
+			A.CITY_CODE = B.CITY_CODE
+		AND A.DEPT_CODE = D.DEPT_CODE
+		<if test="CITY_NAME != null and CITY_NAME != ''">
+		  	 AND B.CITY_NAME = #{CITY_NAME}
+		</if>
+		<if test="CITY_CODE != null and CITY_CODE != ''">
+		  	 AND B.CITY_CODE = #{CITY_CODE}
+		</if>
+	</select>
+	
+	<!-- 查询楼座 -->
+	<select id="getBuildInfo" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			A.AREA_CODE,
+			A.AREA_NAME,
+			B.BUILD_CODE,
+			B.BUILD_NAME
+		FROM
+			T_CODE_SYNC_BUILD B,
+			T_CODE_SYNC_AREA A
+		WHERE
+			B.AREA_CODE = A.AREA_CODE
+		AND A.AREA_CODE =  #{AREA_CODE}
+		AND B.DEL_FLAG = 0
+		AND A.DEL_FLAG = 0
+	</select>
+	
+	<!-- 查询单元房间 -->
+	<select id="getRoomInfo" parameterType="map" resultType="java.util.HashMap">
+		SELECT
+			A.AREA_CODE,
+			A.AREA_NAME,
+			B.BUILD_CODE,
+			B.BUILD_NAME,
+			R.FLOOR_NO,
+			R.UNIT_NO,
+			R.ROOM_CODE,
+			R.ROOM_NAME
+		FROM
+			T_CODE_SYNC_ROOM R,
+			T_CODE_SYNC_BUILD B,
+			T_CODE_SYNC_AREA A
+		WHERE
+			R.BUILD_CODE = B.BUILD_CODE
+		AND B.AREA_CODE = A.AREA_CODE
+		AND A.AREA_CODE = #{AREA_CODE}
+		AND R.BUILD_CODE = #{BUILD_CODE}
+		AND R.DEL_FLAG = 0
+		AND B.DEL_FLAG = 0
+		AND A.DEL_FLAG = 0
+	</select>
+	
+	<!-- 修改密码 -->
+	<update id="modifyPwd" parameterType="map">
+		UPDATE T_PM_OWNER
+			SET UPDATED_TIME = NOW(),
+		 		UPDATED_BY = #{OWNER_CODE,jdbcType=VARCHAR}, 
+				OWNER_PWD = #{OWNER_PWD,jdbcType=VARCHAR}
+			WHERE
+				locate(#{PHONE}, PHONE) > 0
+	</update>
+	
+</mapper>

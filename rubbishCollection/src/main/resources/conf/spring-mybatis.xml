@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+    http://www.springframework.org/schema/util 
+    http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc_driverClassName}" />
+        <property name="jdbcUrl" value="${jdbc_url}" />
+        <property name="user" value="${jdbc_username}" />
+        <property name="password"  value="${jdbc_password}" />
+        <property name="maxPoolSize" value="50"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="initialPoolSize" value="10"/>
+		<property name="maxIdleTime" value="1000"/>
+        <property name="acquireIncrement" value="5" />
+		<property name="maxStatements" value="0" /> 
+		<property name="checkoutTimeout" value="2000" /> 
+        <property name="idleConnectionTestPeriod" value="1000"/>
+    </bean>
+    
+    <!-- 数据源BoneCP -->  
+   <!--  <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">  
+          数据库驱动    
+          <property name="driverClass" value="${jdbc_driverClassName}" /> 
+          相应驱动的jdbcUrl    
+          <property name="jdbcUrl" value="${jdbc_url}" />  
+          数据库的用户名  
+          <property name="username" value="${jdbc_username}"/> 
+          数据库的密码     
+          <property name="password" value="${jdbc_password}"/>  
+          检查数据库连接池中空闲连接的间隔时间，单位是分，默认值：240，如果要取消则设置为0    
+          <property name="idleConnectionTestPeriod" value="60"/> 
+          连接池中未使用的链接最大存活时间，单位是分，默认值：60，如果要永远存活设置为0     
+          <property name="idleMaxAge" value="240"/>   
+          每个分区最大的连接数   
+          <property name="maxConnectionsPerPartition" value="30"/>  
+          每个分区最小的连接数   
+          <property name="minConnectionsPerPartition" value="10"/>  
+          分区数 ，默认值2，最小1，推荐3-4，视应用而定    
+          <property name="partitionCount" value="1"/>
+          每次去拿数据库连接的时候一次性要拿几个,默认值：2      
+          <property name="acquireIncrement" value="5"/>    
+          缓存prepared statements的大小，默认值：0  
+          <property name="statementsCacheSize" value="100"/> 
+          每个分区释放链接助理进程的数量，默认值：3，除非你的一个数据库连接的时间内做了很多工作，不然过多的助理进程会影响你的性能    
+          <property name="releaseHelperThreads" value="3"/>    
+     </bean>   -->  
+
+    
+    <!-- mybatis文件配置，扫描所有mapper文件 -->
+      <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="dataSource"
+          p:configLocation="classpath:conf/mybatis-config.xml"
+          p:mapperLocations="classpath:mapper/**/*.xml"/><!-- configLocation为mybatis属性 mapperLocations为所有mapper-->
+      
+   <!-- spring与mybatis整合配置，扫描所有dao -->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+        p:basePackage="com.neusoft.sdd.**.dao" 
+        p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
+ 
+   <!-- 对数据源进行事务管理 -->
+  <bean id="transactionManager" 
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+        p:dataSource-ref="dataSource"/>
+   
+   <!-- 事务annotation配置 -->
+   <!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+   
+    <!--  声明式容器事务管理 ,transaction-manager指定事务管理器为transactionManager -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+	        <!-- tx:method的属性:
+	          * name 是必须的,表示与事务属性关联的方法名(业务方法名),对切入点进行细化。通配符（*）可以用来指定一批关联到相同的事务属性的方法。
+	                           如：'get*'、'handle*'、'on*Event'等等.
+	          * propagation  不是必须的 ，默认值是REQUIRED 
+	                            表示事务传播行为, 包括REQUIRED,SUPPORTS,MANDATORY,REQUIRES_NEW,NOT_SUPPORTED,NEVER,NESTED
+	          * isolation    不是必须的 默认值DEFAULT 
+	                            表示事务隔离级别(数据库的隔离级别) 
+	          * timeout      不是必须的 默认值-1(永不超时)
+	                            表示事务超时的时间（以秒为单位） 
+	          * read-only    不是必须的 默认值false不是只读的 
+	                            表示事务是否只读？ 
+	          * rollback-for 不是必须的   
+	                            表示将被触发进行回滚的 Exception(s)；以逗号分开。
+	                            如：'com.foo.MyBusinessException,ServletException' 
+	          * no-rollback-for 不是必须的  
+	                              表示不被触发进行回滚的 Exception(s)；以逗号分开。
+	                              如：'com.foo.MyBusinessException,ServletException'
+		        任何 RuntimeException 将触发事务回滚，但是任何 checked Exception 将不触发事务回滚                      
+		  -->
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="mod*" propagation="REQUIRED" />
+            <tx:method name="set*" propagation="REQUIRED" />
+            <tx:method name="del*" propagation="REQUIRED" />
+            <tx:method name="upd*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="remove*" propagation="REQUIRED" />
+            <tx:method name="edit*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="create*" propagation="REQUIRED" />
+            <tx:method name="change*" propagation="REQUIRED" />
+            <tx:method name="upload*" propagation="REQUIRED" />
+            <tx:method name="import*" propagation="REQUIRED" />
+            <tx:method name="cancel*" propagation="REQUIRED" />
+            <tx:method name="send*" propagation="REQUIRED" />
+            <tx:method name="excel*" propagation="REQUIRED" />
+            <tx:method name="list*" propagation="REQUIRED" />
+            <!-- 其他的方法之只读的 -->
+            <tx:method name="*" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+     
+    <aop:config expose-proxy="true">
+        <!-- 只对业务逻辑层实施事务 -->
+        <aop:pointcut id="txPointcut" expression="execution(* com.neusoft.sdd..service..*.*(..))" />
+        <!-- Advisor定义，切入点和通知分别为txPointcut、txAdvice -->
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+    </aop:config>
+   
+</beans>

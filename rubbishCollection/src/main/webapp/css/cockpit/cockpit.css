@@ -1,0 +1,205 @@
+body{
+	background:#00cfd1;
+	margin:0;
+}
+
+.cockpit-title{
+	height:50px;
+	line-height:50px;
+	text-align:center;
+}
+.cockpit-title span.cockpit-nav{
+  display:inline-block;
+  width:42%;
+  border-top:1px solid #fff;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+.cockpit-title span.cockpit-word{
+  color: #fff;
+}
+.cockpit-detail{
+	width:98%;
+	margin:0 auto;
+	margin-bottom:15px;
+}
+.cockpit-detail .cockpit-detail-title{
+	padding:10px;
+	color:#444;
+	background:#fff;
+	border-bottom:1px solid #ddd;
+	border-top-right-radius:5px;
+	border-top-left-radius:5px;
+}
+.cockpit-detail .cockpit-detail-title img{
+	vertical-align:middle;
+	margin-right:5px;
+}
+.cockpit-detail .cockpit-detail-con{
+	position:relative;
+	background-color:white;
+	border-bottom-right-radius:5px;
+	border-bottom-left-radius:5px;
+}
+.cockpit-detail .cockpit-detail-label{
+	position:absolute;
+	bottom:10px;
+	left:10px;
+	color:#888;
+}
+.cockpit-detail .cockpit-detail-con .images-left{
+	position:absolute;
+	width:15px;
+	height:20px;
+	left:10px;
+	bottom:55px;
+	cursor:pointer;
+}
+.cockpit-detail .cockpit-detail-con  .images-right{
+	position:absolute;
+	width:15px;
+	height:20px;
+	right:2px;
+	bottom:55px;
+	cursor:pointer;
+}
+.cockpit-detail .cockpit-detail-con .cockpit-subing{
+	width:30%;
+	float:left;
+	line-height:25px;
+	font-size:12px;
+	color:#888;
+	margin-top:40px;
+	padding-left:10px;
+	max-height:125px;
+	overflow-y:auto;
+}
+.cockpit-detail .cockpit-detail-con .cockpit-detail-btn{
+	padding-left:20px;
+	padding-top:10px;
+	height:35px;
+}
+.cockpit-detail .cockpit-detail-con .cockpit-detail-btn a{
+	background:#00cdce;
+	color:#fff;
+	border-radius:3px;
+	padding:3px 15px;
+	font-size:13px;
+}
+.combo{
+	border:1px solid #00cdce;
+	margin:0;
+	margin-top:-2px;
+}
+
+.modular{
+	display:inline-block;
+	width:32%;
+	margin:10px 0;
+}
+.modular .block{
+	color:#888;
+}
+.block{
+	margin-left:40%;
+	height:50px;
+	font-size:15px;
+	line-height: 50px;
+}
+.modular .font-regis{
+	font-size:18px;
+	color:#00caf7;
+}
+.font-rep{
+	color:#00caf7;
+	font-size:30px;
+}
+.font-compl{
+	color:#eab640;
+	font-size:30px;
+}
+.font-timely{
+	color:#f06664;
+	font-size:30px;
+}
+.font-total{
+	font-size:20px;
+	margin:0 5px;
+}
+.modular .font-room{
+	font-size:18px;
+	color:#eab640;
+}
+.modular .font-rate{
+	font-size:18px;
+	color:#f06664;
+}
+
+.font-rate img{
+	width:35px;
+	height:45px;
+	vertical-align:text-bottom;
+}
+#OWNER_REGIS_TODAY,#BIND_ROOM_TODAY,#LINK_GROWTH_RATE{
+	padding:0 3px;
+}
+.font_size{
+	font-size:50px;
+}
+
+.download-con{
+	width:98%;
+	margin:0 auto;
+}
+.sencend-con .cockpit-detail-btn{
+	text-align:right;
+	margin-right:20px;
+}
+.senevn-con .cockpit-detail-btn{
+	text-align:right;
+	margin-right:20px;
+}
+.first-con,.sencend-con,.third-con,.four-con,.five-con,.six-con,.senevn-con,.eight-con,.nine-con,.ten-con,.eleven-con{
+	float:left;
+	width:32%;
+	background:#fff;
+	border-radius:5px;
+	position:relative;
+	min-height:250px;
+}
+.first-con,.sencend-con,.third-con,.four-con,.five-con,.six-con canvas{
+	cursor:pointer;
+}
+
+#RoomBrokenLine,#circularChart,#chartContainer,#ProjectActiveUser,#UserBrokenLine,#PvUvBrokenLine,#ProjectPvHistogram,#UserUvProportion,#ActiveUserProportion,#repairCir,#complaintCir,#postCir,#repairComplaintPost span{
+	margin-left:1px;
+}
+.sencend-con,.five-con,.ten-con{
+	margin:0 20px;
+}
+.pv-con .senevn-con{
+	width:40%;
+	margin-right:10px;
+}
+.pv-con .eight-con{
+	width:58%;
+}
+.pv-con .eight-con .eight-title{
+	color:#888;
+}
+#UV_TOTAL_DAY,#PV_TOTAL_DAY,#TODAY_ACTIVE_USERS,#CHAIN_GROWTH,#REP_COMPL_EVAL_RATE,#REP_COMPL_COMPLETED_RATE,#COMPL_EVAL_RATE,#COMPLETED_RATE,#NOTE_TIMELY_REPLY_RATE{
+	font-size:30px;
+	margin: 0 5px;
+}
+.font-uv{
+	color:#ff9000;
+}
+.font-pv{
+	color:#f521ad;
+}
+.font-user{
+	color:#009b34;
+}
+.font-growth{
+	color:#00dcdc;
+}

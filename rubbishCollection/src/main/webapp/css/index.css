@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+body{
+	 background: #4791BE url(../images/login-blurry-bg.jpg) no-repeat top center;
+}
+
+#logincontent{
+	background:url("../images/login_bg.png") no-repeat top center;
+	margin:69px auto 0;
+	width:423px;
+	height:366px;
+	border:1px solid #ededed
+}
+
+.title{
+	background:url("../images/member_title.png") no-repeat top left;
+	margin:37px auto 20px;
+	width:229px;
+	height:36px
+}
+
+.button{
+	background:url("../images/button.png") no-repeat center;
+	border:none;
+	cursor:pointer;
+	margin:0 auto;
+	width:150px;
+	height:55px !important;
+}

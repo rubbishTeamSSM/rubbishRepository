@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.businessConsole.role.dao.IRoleDao">
+	
+	<!--获取当前系统的所有角色 -->
+	<!-- 获取角色列表 -->
+	<select id="getAllRoles" resultType="role">
+		SELECT UUID,
+		       ROLE_CODE,
+		       ROLE_NAME,
+		       SORT_NO,
+			   REMARK,
+		       CREATED_BY,
+		       DATE_FORMAT(CREATED_TIME,'%Y-%m-%d %T') AS CREATED_TIME,
+		       UPDATED_BY,
+		       DATE_FORMAT(UPDATED_TIME,'%Y-%m-%d %T') AS UPDATED_TIME
+		 FROM T_SYS_ROLE
+		 WHERE DEL_FLAG = 0
+		 ORDER BY CREATED_TIME DESC
+	</select>
+	
+	<!-- 获取用户角色 -->
+	<select id="getUserAllRoles" parameterType="String" resultType="role">
+    	SELECT A.ROLE_CODE, A.ROLE_NAME,B.DEFAULT_FLAG
+		  FROM T_SYS_ROLE A, T_SYS_USER_ROLE B
+	    WHERE A.ROLE_CODE = B.ROLE_CODE
+		   AND B.USER_CODE = #{USER_CODE}
+		   AND A.DEL_FLAG = 0
+    </select>
+    
+    <!-- 用户管理-角色授权，删除用户角色关联关系 -->
+    <delete id="deleteUserRoles">
+     	DELETE FROM T_SYS_USER_ROLE WHERE USER_CODE = #{USER_CODE}
+    </delete>
+    
+    <!-- 用户管理-角色授权, 新增用户角色关联关系 -->
+	<insert id="addUserRoles" parameterType="java.util.HashMap">
+        INSERT INTO  T_SYS_USER_ROLE
+         		(UUID,ROLE_CODE,USER_CODE,CREATED_TIME,CREATED_BY,DEFAULT_FLAG,DEL_FLAG,SORT_NO)
+	        VALUES  
+		<foreach collection="roles" item="tag"  index="index" open="" close="" separator="," >
+				(UUID(), #{tag.role_code}, #{USER_CODE}, NOW(), #{CREATED_BY}, ${tag.default_flag},0,0)
+        </foreach>
+    </insert>
+    
+    <!--清除原有的默认角色  -->
+    <update id="clearUserDefaultRole" parameterType="java.util.HashMap">
+		UPDATE T_SYS_USER_ROLE 
+		   SET DEFAULT_FLAG = 0,
+		   	   UPDATED_TIME = NOW(),
+		   	   UPDATED_BY   = #{UPDATED_BY}
+		 WHERE USER_CODE = #{USER_CODE}
+	</update>
+	
+	<!--设置新的默认角色 -->
+	<update id="setUserDefaultRole" parameterType="java.util.HashMap">
+		UPDATE T_SYS_USER_ROLE 
+		   SET DEFAULT_FLAG = 1,
+		   	   UPDATED_TIME = NOW(),
+		   	   UPDATED_BY   = #{UPDATED_BY}
+		 WHERE USER_CODE = #{USER_CODE} 
+		   AND ROLE_CODE = #{ROLE_CODE}
+	</update>
+	
+	<!-- 查询用户默认角色 -->
+	<select id="getUserDefaultRole" parameterType="string" resultType="role">
+		SELECT A.ROLE_CODE, A.ROLE_NAME, A.REMARK
+		  FROM T_SYS_ROLE A, T_SYS_USER_ROLE B
+		 WHERE A.ROLE_CODE = B.ROLE_CODE
+		   AND B.USER_CODE = #{USER_CODE,jdbcType=VARCHAR}
+		   AND B.DEFAULT_FLAG = 1
+		   AND A.DEL_FLAG = 0
+	</select>
+	
+	<!-- 获取角色列表 -->
+	<select id="getRoles" parameterType="role" resultType="role">
+		 SELECT UUID,
+		        ROLE_CODE,
+		        ROLE_NAME,
+		        REMARK
+		   FROM T_SYS_ROLE
+		  WHERE DEL_FLAG = 0
+		  ORDER BY CREATED_TIME DESC
+	</select>
+	
+	<!-- 新增角色 -->
+	<insert id="addNewRole" parameterType="role">
+        INSERT INTO T_SYS_ROLE
+        	(UUID,ROLE_CODE,ROLE_NAME,REMARK,DEL_FLAG,CREATED_TIME,CREATED_BY, SORT_NO, UPDATED_TIME, UPDATED_BY)
+        VALUES
+        	(
+        	#{uuid,jdbcType=VARCHAR},
+        	#{role_code,jdbcType=VARCHAR},
+        	#{role_name,jdbcType=VARCHAR},
+        	#{remark,jdbcType=VARCHAR},
+        	#{del_flag,jdbcType=VARCHAR},
+        	now(),
+        	#{created_by,jdbcType=VARCHAR},
+        	0,
+        	now(),
+        	#{created_by,jdbcType=VARCHAR})
+    </insert>
+    
+    <!-- 获取角色已授权的菜单 -->
+    <select id="getRoleAssginMenu" resultType="java.lang.String">
+		SELECT MENU_CODE FROM T_SYS_ROLE_MENU WHERE ROLE_CODE = #{roleId}
+    </select>
+    
+    <!-- 删除当前角色管理的菜单关系 -->
+    <delete id="deleteRoleMenu">
+        DELETE FROM T_SYS_ROLE_MENU WHERE ROLE_CODE = #{roleId}
+    </delete>
+    
+    <!-- 角色管理-菜单授权 -->
+    <insert id="addRoleMenu" parameterType="java.util.HashMap">
+    	INSERT INTO T_SYS_ROLE_MENU
+         		(UUID,ROLE_CODE,MENU_CODE,CREATED_TIME,CREATED_BY,DEL_FLAG,UPDATED_TIME,UPDATED_BY,SORT_NO)
+	        VALUES  
+		<foreach collection="menuIds" item="tag"  index="index" open="" close="" separator="," >
+				(UUID(), #{roleId}, #{tag.id}, NOW(), #{created_by},0, NOW(),#{created_by},0)
+        </foreach>
+    </insert>
+    
+    <!-- -->
+    <select id="getRoleAssginUser" resultType="java.lang.String" parameterType="java.util.HashMap">
+        SELECT USER_CODE ID 
+          FROM T_SYS_USER_ROLE 
+         WHERE ROLE_CODE = #{roleId} 
+           AND USER_CODE IN 
+        <foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </select>
+    
+    <!-- 删除已授权该角色的所有用户 -->
+    <delete id="deleteRoleUser" parameterType="java.util.HashMap">
+       DELETE FROM T_SYS_USER_ROLE 
+        WHERE USER_CODE IN 
+       <foreach item="item" index="index" collection="currUserIds" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+		<if test="roleId != null and roleId != ''">
+             AND ROLE_CODE = #{roleId} 
+        </if>
+    </delete>
+    
+	<!-- 查询该用户是否存在默认角色 -->
+	<select id="isExistMrjs" resultType="int" parameterType="java.lang.String">
+		SELECT COUNT(1)
+		  FROM T_SYS_USER_ROLE T
+		 WHERE T.DEFAULT_FLAG = 1
+		   AND T.USER_CODE = #{USER_CODE}
+	</select>
+	
+	<!-- 批量插入用户角色信息 -->
+	<insert id="insertUserRoleInfo" parameterType="java.util.List">
+		INSERT INTO T_SYS_USER_ROLE
+			  (UUID, USER_CODE, ROLE_CODE, CREATED_TIME, CREATED_BY, DEFAULT_FLAG, SORT_NO, DEL_FLAG, UPDATED_TIME, UPDATED_BY)
+			VALUES
+        <foreach item="list" index="index" collection="list"  separator=",">  
+			  (#{list[${index}].uuid}, #{list[${index}].user_code}, #{list[${index}].role_code}, NOW(), #{list[${index}].created_by}, 
+			  #{list[${index}].default_flag}, 0, 0, NOW(), #{list[${index}].created_by})
+		</foreach>
+	</insert>
+	
+	<!-- 获取用户的角色信息 -->
+    <select id="getUserRoles" resultType="role">
+    	SELECT A.ROLE_CODE,A.ROLE_NAME,A.REMARK 
+    	  FROM T_SYS_ROLE A , T_SYS_USER_ROLE B
+    	 WHERE A.ROLE_CODE = B.ROLE_CODE
+    	   AND B.USER_CODE = #{USER_CODE}
+    	   AND B.DEFAULT_FLAG = 1
+    	   AND A.DEL_FLAG = 0
+    </select>
+    
+    <!-- 获取角色详情 -->
+	<select id="getRole" resultType="role">
+    	SELECT ROLE_CODE,ROLE_NAME,REMARK FROM T_SYS_ROLE WHERE ROLE_CODE = #{ROLE_CODE} 
+    </select>
+    
+    <!-- 修改角色 -->
+    <update id="updateRole" parameterType="role">
+		UPDATE T_SYS_ROLE 
+		   SET ROLE_NAME    = #{role_name},
+		   	   REMARK       = #{remark,jdbcType=VARCHAR},
+		   	   UPDATED_TIME = NOW(),
+		   	   UPDATED_BY   = #{updated_by}
+		 WHERE ROLE_CODE = #{role_code}
+    </update>
+    
+    <!-- 删除角色菜单 -->
+    <delete id="deleteRoleMenus">
+    	DELETE FROM T_SYS_ROLE_MENU 
+    	 WHERE ROLE_CODE IN 
+    	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </delete>
+    
+    <!-- 删除用户角色 -->
+	<delete id="deleteUserRoleInfo">
+    	DELETE FROM T_SYS_USER_ROLE 
+    	 WHERE ROLE_CODE IN 
+    	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </delete>
+    
+    <!-- 删除角色 -->
+    <update id="deleteRoles" parameterType="map">
+		UPDATE T_SYS_ROLE 
+		   SET DEL_FLAG     = 1,
+		   	   UPDATED_TIME = NOW(),
+		   	   UPDATED_BY   = #{updated_by} 
+		 WHERE ROLE_CODE IN 
+		<foreach item="item" index="index" collection="roleCodes" open="(" separator="," close=")">  
+			 #{item}  
+		</foreach>
+    </update>
+    
+     <delete id="deleteUserSRoles">
+    	DELETE FROM T_SYS_USER_ROLE WHERE USER_CODE IN 
+    	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+		 #{item}  
+		</foreach>
+    </delete> 
+	
+	<!-- 查询角色菜单按钮 -->
+	<select id="getRoleMenuBtn" parameterType="menuButton" resultType="menuButton">
+		SELECT A.BUTTON_CODE, A.BUTTON_NAME, A.BUTTON_STYLE, A.BUTTON_URL,A.REMARK
+		  FROM T_SYS_MENU_BUTTON A, T_SYS_ROLE_MENU_BUTTON B
+		 WHERE A.BUTTON_CODE = B.BUTTON_CODE
+		 <choose>
+		 	<when test="button_code != null and button_code != ''">
+		   		AND A.PARENT_BUTTON_CODE = #{button_code}
+		 	</when>
+		 	<otherwise>
+		   		AND A.LEVEL = 1
+		 	</otherwise>
+		 </choose>
+		   AND B.MENU_CODE = #{menu_code}
+		   AND B.ROLE_CODE = #{role_code}
+	</select>
+</mapper>

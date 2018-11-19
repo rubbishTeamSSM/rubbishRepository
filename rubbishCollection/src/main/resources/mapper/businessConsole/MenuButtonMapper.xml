@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.businessConsole.menu.dao.MenuButtonDao">
+
+	<!-- 获取菜单按钮列表 -->
+	<select id="getMenuBtnList" parameterType="String" resultType="menuButton">
+		SELECT T.UUID,
+		       T.BUTTON_CODE,
+		       T.BUTTON_NAME,
+		       T.BUTTON_STYLE,
+		       T.PARENT_BUTTON_CODE,
+		       T.LEVEL,
+		       T.BUTTON_URL,
+		       T.DEL_FLAG,
+		       T.MENU_CODE,
+		       T.REMARK,
+		       T.SORT_NO,
+		       T.AUTH_CODE
+		  FROM T_SYS_MENU_BUTTON T
+		 WHERE T.MENU_CODE = #{menu_code}
+		   AND DEL_FLAG = 0
+		 ORDER BY SORT_NO
+	</select>
+	
+	<!-- 新增菜单按钮 -->
+	<insert id="addMenuBtn" parameterType="menuButton">
+		INSERT INTO T_SYS_MENU_BUTTON (
+			BUTTON_CODE,
+			BUTTON_NAME,
+			BUTTON_URL,
+			BUTTON_STYLE,
+			MENU_CODE,
+			REMARK,
+			DEL_FLAG,
+			UUID,
+			SORT_NO,
+			CREATED_TIME,
+			CREATED_BY,
+			UPDATED_TIME,
+			UPDATED_BY,
+			PARENT_BUTTON_CODE,
+			LEVEL,
+			AUTH_CODE
+		) VALUES (
+			#{button_code,jdbcType=VARCHAR},
+			#{button_name,jdbcType=VARCHAR},
+			#{button_url,jdbcType=VARCHAR},
+			#{button_style,jdbcType=VARCHAR},
+			#{menu_code,jdbcType=VARCHAR},
+			#{remark,jdbcType=VARCHAR},
+			0,
+			#{uuid,jdbcType=VARCHAR},
+			#{sort_no,jdbcType=NUMERIC},
+			NOW(),
+			#{created_by,jdbcType=VARCHAR},
+			NOW(),
+			#{created_by,jdbcType=VARCHAR},
+			#{parent_button_code,jdbcType=VARCHAR},
+			#{level,jdbcType=NUMERIC},
+			#{auth_code_btn,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 获取按钮详情 -->
+	<select id="getMenuBtnDetail" parameterType="menuButton" resultType="menuButton">
+		SELECT BUTTON_CODE,
+		       BUTTON_NAME,
+		       BUTTON_URL,
+		       BUTTON_STYLE,
+		       MENU_CODE,
+		       REMARK,
+		       DEL_FLAG,
+		       UUID,
+		       SORT_NO
+		  FROM T_SYS_MENU_BUTTON
+		 WHERE BUTTON_CODE = #{button_code}
+	</select>
+	
+	<!-- 修改按钮 -->
+	<update id="updateMenuBtn" parameterType="menuButton">
+		UPDATE T_SYS_MENU_BUTTON
+		   SET BUTTON_NAME  = #{button_name,jdbcType=VARCHAR},
+		       BUTTON_URL   = #{button_url,jdbcType=VARCHAR},
+		       BUTTON_STYLE = #{button_style,jdbcType=VARCHAR},
+		       REMARK       = #{remark,jdbcType=VARCHAR},
+		       SORT_NO      = #{sort_no,jdbcType=NUMERIC},
+		       UPDATED_TIME = NOW(),
+		       UPDATED_BY   = #{updated_by,jdbcType=VARCHAR}
+		 WHERE BUTTON_CODE = #{button_code,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 删除按钮 -->
+	<update id="deleteMenuBtn" parameterType="menuButton">
+		UPDATE T_SYS_MENU_BUTTON
+		   SET DEL_FLAG     = 1,
+		       UPDATED_TIME = NOW(),
+		       UPDATED_BY   = #{updated_by,jdbcType=VARCHAR}
+		 <where>
+		 	<if test="button_codes != null and button_codes != ''">
+		 		BUTTON_CODE IN 
+				<foreach item="item" index="index" collection="button_codes" open="(" separator="," close=")">  
+					#{item}  
+				</foreach>
+		 	</if>
+		 	<if test="menu_codes != null and menu_codes != ''">
+		 		AND MENU_CODE IN 
+				<foreach item="item" index="index" collection="menu_codes" open="(" separator="," close=")">  
+					#{item}  
+				</foreach>
+		 	</if>
+		 </where>
+	</update>
+	
+	<!-- 删除角色菜单按钮关联关系 -->
+	<delete id="delRoleMenuBtnBy" parameterType="menuButton">
+		DELETE FROM T_SYS_ROLE_MENU_BUTTON
+		<where>
+		 	<if test="button_codes != null and button_codes != ''">
+		 		BUTTON_CODE IN 
+				<foreach item="item" index="index" collection="button_codes" open="(" separator="," close=")">  
+					#{item}  
+				</foreach>
+		 	</if>
+		 	<if test="menu_codes != null and menu_codes != ''">
+		 		AND MENU_CODE IN 
+				<foreach item="item" index="index" collection="menu_codes" open="(" separator="," close=")">  
+					#{item}  
+				</foreach>
+		 	</if>
+		 	<if test="role_codes != null and role_codes != ''">
+		 		AND ROLE_CODE IN 
+				<foreach item="item" index="index" collection="role_codes" open="(" separator="," close=")">  
+					#{item}  
+				</foreach>
+		 	</if>
+		 	<if test="role_code != null and role_code != ''">
+		 		AND ROLE_CODE = #{role_code}
+		 	</if>
+		</where>
+	</delete>
+	
+	<!-- 获取所有的菜单按钮 -->
+	<select id="getAllMenuBtn" resultType="menuButton">
+		SELECT K.MENU_CODE ,
+		       K.MENU_NAME ,
+		       K.PARENT_MENU_CODE,
+		       CASE K.PARENT_MENU_CODE
+		         WHEN '0' THEN
+		          NULL
+		         ELSE
+		          K.PARENT_MENU_CODE
+		       END _PARENTID,
+		       K.AUTH_CODE,
+		       K1.BTN_INFO
+		  FROM T_SYS_MENU K
+		  LEFT JOIN (SELECT T.MENU_CODE,
+		                    GROUP_CONCAT(CONCAT(T.BUTTON_CODE, '%', T.BUTTON_NAME)) BTN_INFO
+		               FROM T_SYS_MENU_BUTTON T
+		              WHERE T.DEL_FLAG = 0
+		              GROUP BY T.MENU_CODE) K1
+		    ON K.MENU_CODE = K1.MENU_CODE
+		 WHERE K.DEL_FLAG = 0
+		 ORDER BY K.AUTH_CODE ASC, K. LEVEL ASC
+	</select>
+	
+	<!-- 获取角色菜单（类型为[菜单]） -->
+	<select id="getRoleMenuBy" parameterType="menuButton" resultType="menuButton">
+		SELECT T1.ROLE_CODE, T1.MENU_CODE
+		  FROM T_SYS_ROLE_MENU T1, T_SYS_MENU T2
+		 WHERE T1.MENU_CODE = T2.MENU_CODE
+		   AND T2.TYPE = 1
+		   AND T1.ROLE_CODE = #{role_code}
+	</select>
+	
+	<!-- 获取角色菜单按钮 -->
+	<select id="getRoleMenuBtn" parameterType="menuButton" resultType="menuButton">
+		SELECT T.ROLE_CODE, T.MENU_CODE, T.BUTTON_CODE
+		  FROM T_SYS_ROLE_MENU_BUTTON T
+		 WHERE T.ROLE_CODE = #{role_code}
+		   AND T.MENU_CODE = #{menu_code}
+	</select>
+	
+	<!-- 新增角色菜单 -->
+	<insert id="addRoleMenu" parameterType="menuButton">
+		INSERT INTO T_SYS_ROLE_MENU
+		  (ROLE_CODE, MEUN_CODE, DEL_FLAG, UUID, CREATED_TIME, CREATED_BY, SORT_NO, UPDATED_TIME, UPDATED_BY)
+		VALUES
+		<foreach collection="menu_codes" item="tag"  index="index" open="" close="" separator="," >
+		  (#{role_code}, #{tag}, 0, UUID(), NOW(), #{created_by}, 0, NOW(), #{created_by})
+        </foreach>
+	</insert>
+	
+	<!-- 新增角色菜单按钮 -->
+	<insert id="addRoleMenuBtn" parameterType="map">
+		INSERT INTO T_SYS_ROLE_MENU_BUTTON
+		  (ROLE_CODE, MENU_CODE, BUTTON_CODE, DEL_FLAG, UUID,
+		   CREATED_TIME, CREATED_BY, SORT_NO, UPDATED_TIME, UPDATED_BY)
+		VALUES
+		<foreach collection="btns" item="tag"  index="index" open="" close="" separator="," >
+		  (#{roleId}, #{tag.menu_code}, #{tag.button_code},
+		   0, UUID(), NOW(), #{created_by}, 0, NOW(), #{created_by})
+        </foreach>
+	</insert>
+	<!-- 获取范围代码 -->
+	<select id="getParentAuthCode" resultType="string" parameterType="menu">
+      SELECT
+			AUTH_CODE
+		FROM
+			T_SYS_MENU_BUTTON
+		WHERE
+			DEL_FLAG = 0
+		AND BUTTON_CODE = #{parent_button_code}
+    </select>
+</mapper>

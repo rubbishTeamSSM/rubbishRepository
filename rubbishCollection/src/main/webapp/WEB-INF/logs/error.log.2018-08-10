@@ -1,0 +1,308 @@
+2018-08-10 09:14:23 [ http-8080-6:660671 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.roomInfoMgr.controller.RoomInfoMgrController--> getRoomInfoGrid() Exception:
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'TCRO.RECOVER_NUM' in 'field list'
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\roomInfoMgr\roomInfoMgrMapper.xml]
+### The error may involve com.neusoft.sdd.roomInfoMgr.dao.IRoomInfoMgrDao.getRoomInfoList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT count(*) FROM (SELECT TCRO.ROOM_CODE, TCRO.ROOM_NAME, TCRO.BUILD_CODE, TCRO.AREA_CODE, TCRO.PROJECT_CODE, TCRO.REGION_CODE, TCRO.ROOM_NUM, TCRO.TOTAL_NUM, TCRO.RECOVER_NUM, TCRO.VERSION, TCRO.YEAR, TCRO.MONTH, TCRE.REGION_NAME, TCP.PROJECT_NAME, TCA.AREA_NAME, TCB.BUILD_NAME, CONCAT(RECOVER_NUM, '/', TOTAL_NUM) RATE_NUM, CONCAT(CONVERT((TCRO.RECOVER_NUM / TCRO.TOTAL_NUM) * 100, decimal(16, 2)), '%') RATE FROM T_CODE_ROOM TCRO, T_CODE_REGION TCRE, T_CODE_PROJECT TCP, T_CODE_AREA TCA, T_CODE_BUILD TCB WHERE TCRO.DEL_FLAG = 0 AND TCRE.DEL_FLAG = 0 AND TCP.DEL_FLAG = 0 AND TCA.DEL_FLAG = 0 AND TCRO.REGION_CODE = TCRE.REGION_CODE AND TCRO.PROJECT_CODE = TCP.PROJECT_CODE AND TCRO.AREA_CODE = TCA.AREA_CODE AND TCRO.BUILD_CODE = TCB.BUILD_CODE AND TCRO.YEAR = ? AND TCRO.MONTH = ?) table_count
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'TCRO.RECOVER_NUM' in 'field list'
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'TCRO.RECOVER_NUM' in 'field list'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:231)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:73)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:73)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:371)
+	at com.sun.proxy.$Proxy19.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:198)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:114)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:58)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:43)
+	at com.sun.proxy.$Proxy46.getRoomInfoList(Unknown Source)
+	at com.neusoft.sdd.roomInfoMgr.service.impl.RoomInfoMgrServiceImpl.getRoomInfoGrid(RoomInfoMgrServiceImpl.java:39)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)
+	at com.sun.proxy.$Proxy47.getRoomInfoGrid(Unknown Source)
+	at com.neusoft.sdd.roomInfoMgr.controller.RoomInfoMgrController.getRoomInfoGrid(RoomInfoMgrController.java:77)
+	at com.neusoft.sdd.roomInfoMgr.controller.RoomInfoMgrController$$FastClassBySpringCGLIB$$91930226.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:720)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:58)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:655)
+	at com.neusoft.sdd.roomInfoMgr.controller.RoomInfoMgrController$$EnhancerBySpringCGLIB$$cde4d112.getRoomInfoGrid(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:222)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:137)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:110)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:814)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:737)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:969)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:871)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:845)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:717)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:121)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.neusoft.sdd.base.filter.ConversationFilter.doFilter(ConversationFilter.java:64)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:857)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'TCRO.RECOVER_NUM' in 'field list'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.Util.getInstance(Util.java:386)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1054)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4237)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4169)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2617)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2778)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2834)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2156)
+	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1379)
+	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.execute(NewProxyPreparedStatement.java:989)
+	at sun.reflect.GeneratedMethodAccessor89.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:55)
+	at com.sun.proxy.$Proxy65.execute(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:56)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:70)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:57)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:259)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:132)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:105)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:81)
+	at sun.reflect.GeneratedMethodAccessor87.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:46)
+	at com.github.pagehelper.SqlUtil._processPage(SqlUtil.java:386)
+	at com.github.pagehelper.SqlUtil.processPage(SqlUtil.java:329)
+	at com.github.pagehelper.PageHelper.intercept(PageHelper.java:150)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:57)
+	at com.sun.proxy.$Proxy63.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:104)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:98)
+	at sun.reflect.GeneratedMethodAccessor100.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:358)
+	... 69 more
+2018-08-10 16:58:50 [ http-8080-6:791216 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:58:50 [ http-8080-4:791245 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:58:50 [ http-8080-2:791247 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:59:01 [ http-8080-4:801946 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:59:01 [ http-8080-8:801993 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:59:01 [ http-8080-3:802001 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:59:44 [ http-8080-5:844943 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:59:44 [ http-8080-8:844985 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 16:59:44 [ http-8080-6:844989 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:00:02 [ http-8080-2:863306 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:00:02 [ http-8080-7:863331 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:00:02 [ http-8080-5:863357 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:17:59 [ http-8080-1:647220 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:17:59 [ http-8080-3:647247 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:17:59 [ http-8080-5:647256 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:18:02 [ http-8080-5:650391 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:18:02 [ http-8080-2:650397 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:18:04 [ http-8080-3:652735 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:18:04 [ http-8080-5:652747 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:18:04 [ http-8080-2:652757 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getRegion() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getRegion-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DISTINCT A.REGION_CODE AS REGION_CODE,       A.REGION_NAME AS REGION_NAME   FROM T_CODE_REGION A,T_SYS_USER2 B,T_CODE_PROJECT C   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0 AND C.DEL_FLAG = 0    AND B.PROJECT_CODE = C.PROJECT_CODE    AND C.REGION_CODE = A.REGION_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:18:11 [ http-8080-5:659071 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 17:18:11 [ http-8080-1:659094 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+### The error may exist in file [E:\work\laji\rubbishCollection\target\classes\mapper\goodsRecovery\goodsRecoveryMapper.xml]
+### The error may involve com.neusoft.sdd.goodsRecovery.dao.IGoodsRecoveryDao.getProject-Inline
+### The error occurred while setting parameters
+### SQL: SELECT A.PROJECT_NAME AS PROJECT_NAME,     A.PROJECT_CODE AS PROJECT_CODE   FROM T_CODE_PROJECT A,T_SYS_USER2 B   WHERE A.DEL_FLAG = 0 AND B.DEL_FLAG = 0    AND A.PROJECT_CODE = B.PROJECT_CODE    AND B.USER_CODE = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'rubbishcollection.t_sys_user2' doesn't exist
+2018-08-10 22:08:37 [ http-8080-1:171773 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:java.lang.NullPointerException
+2018-08-10 22:09:19 [ http-8080-4:214033 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:java.lang.NullPointerException
+2018-08-10 22:09:19 [ http-8080-3:214043 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:java.lang.NullPointerException
+2018-08-10 22:09:36 [ http-8080-5:230687 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:java.lang.NullPointerException
+2018-08-10 22:14:28 [ http-8080-1:213344 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:java.lang.NullPointerException
+2018-08-10 22:14:28 [ http-8080-2:213344 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.goodsRecovery.controller.GoodsRecoveryController-->getProject() exception:java.lang.NullPointerException

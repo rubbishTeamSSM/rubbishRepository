@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.businessConsole.ftp.dao.IFtpDao">
+
+	<!-- 获取现用系统参数 -->
+	<select id="getCurrentJzcs" resultType="xtjzcs">
+		SELECT UUID, JZ_DM, JZLJ, JZZH, JZMM, JZXY_BJ,FWDZ,DKH
+		  FROM T_XT_XTJZCS
+		 WHERE JZXY_BJ = '1'
+	</select>
+	
+	<!-- 新增介质明细 -->
+	<insert id="insertXtjzmx" parameterType="xtjzmx">
+		INSERT INTO T_XT_XTJZMX
+		  (WJ_DM,
+		   SJ_UUID,
+		   WJJ_DM,
+		   WJYM,
+		   WJFWQM,
+		   WJGS,
+		  <!-- WJ_URL, -->
+		   WJDX,
+		   JZ_DM,
+		   ZF_BJ,
+		   LR_SJ,
+		   LRRY_DM)
+		VALUES
+		  (#{wj_dm},
+		   #{sj_uuid}, 
+		   #{wjj_dm}, 
+		   #{wjym}, 
+		   #{wjfwqm}, 
+		   #{wjgs}, 
+		   <!-- #wj_url#,  -->
+		   #{wjdx}, 
+		   #{jz_dm}, 
+		   #{zf_bj}, 
+		   NOW(), 
+		   #{lrry_dm})
+	</insert>
+	
+	<!-- 获取介质明细 -->
+	<select id="getXtjzmxBy" parameterType="xtjzmx" resultType="xtjzmx">
+		SELECT A.WJ_DM,
+		       A.SJ_UUID,
+		       A.WJJ_DM,
+		       A.WJYM,
+		       A.WJFWQM,
+		       A.WJGS,
+		       <!-- WJ_URL, -->
+		       A.JZ_DM,
+		       B.JZLJ,
+		       B.JZZH,
+		       B. JZMM
+		  FROM T_XT_XTJZMX A,T_XT_XTJZCS B
+		  WHERE A.ZF_BJ='0'  AND A.JZ_DM = B.JZ_DM 
+		  <if test="wj_dm != null and wj_dm != ''">
+		   		AND WJ_DM = #{wj_dm}
+		   </if>
+		   <if test="sj_uuid != null and sj_uuid != ''">
+		   		AND SJ_UUID = #{sj_uuid}
+		   </if>
+	</select>
+	
+	
+	<!-- 获取介质明细 -->
+	<select id="getXtjzmxBySjuuid" parameterType="xtjzmx" resultType="xtjzmx">
+		SELECT A.WJ_DM,
+		       A.SJ_UUID,
+		       B.FWDZ,
+		       A.WJJ_DM,
+		       A.WJYM,
+		       A.WJFWQM,
+		       A.WJGS,
+		       <!-- WJ_URL, -->
+		       A.JZ_DM,
+		       B.JZLJ,
+		       B.JZZH,
+		       B. JZMM
+		  FROM T_XT_XTJZMX A,T_XT_XTJZCS B
+		  WHERE A.ZF_BJ='0'  AND A.JZ_DM = B.JZ_DM 
+		   <if test="sj_uuid != null and sj_uuid != ''">
+		   		AND SJ_UUID = #{sj_uuid}
+		   </if>
+		   <if test="wjfwqm != null and wjfwqm != ''">
+		   		AND WJFWQM = #{wjfwqm}
+		   </if>
+		   order by A.xh
+	</select>
+	
+	
+	<!-- 更新介质明细的作废标记 -->
+	<update id="updateWjzfbj" parameterType="java.util.HashMap">
+		UPDATE T_XT_XTJZMX
+		   SET ZF_BJ = #{zf_bj}
+		WHERE 1=1
+	    <if test="wj_dm != null and wj_dm != ''">
+	   		AND WJ_DM = #{wj_dm}
+	    </if>
+	    <if test="sj_uuid != null and sj_uuid != ''">
+	   		AND SJ_UUID = #{sj_uuid}
+	    </if>
+	</update>
+	
+	<!-- 获取文件URL -->
+	<select id="getWjURL" resultType="java.lang.String" parameterType="java.util.Map">
+		SELECT CONCAT(T2.DQDZ,
+		       '/hisense/download/', T1.WJJ_DM , '/' , T1.WJFWQM)
+		  FROM T_XT_XTJZMX T1, T_XT_XTJZCS T2
+		 WHERE T1.JZ_DM = T2.JZ_DM
+		   AND T2.JZXY_BJ = '1'
+		   AND T1.WJ_DM = #{wj_dm}
+	</select>
+	
+	<!-- 更新作废标记和数据uuid -->
+	<update id="UpdateZfbjAndSjuuid" parameterType="java.util.Map">
+		UPDATE T_XT_XTJZMX
+		   SET ZF_BJ = #{zf_bj}, SJ_UUID = #{sj_uuid} ,XH = (select t.maxXh from (select IFNULL(Max(XH),0) as maxXh from T_XT_XTJZMX where SJ_UUID = #{sj_uuid} and ZF_BJ = 0) t )+1
+		 WHERE WJ_DM = #{wj_dm}
+	</update>
+	
+	<update id="updateZfbjAndSjuuidByfwqm" parameterType="java.util.Map">
+		UPDATE T_XT_XTJZMX
+		   SET ZF_BJ = #{zf_bj}, SJ_UUID = #{sj_uuid} ,XH = (select t.maxXh from (select IFNULL(Max(XH),0) as maxXh from T_XT_XTJZMX where SJ_UUID = #{sj_uuid} and ZF_BJ = 0) t )+1
+		 WHERE WJFWQM = #{wjfwqm}
+	</update>
+	
+	<select id="queryforzfbj" resultType="java.util.HashMap">
+		 SELECT WJFWQM wjFwqm,WJJ_DM wjjDm FROM T_XT_XTJZMX WHERE ZF_BJ='1'
+	</select>
+	
+	<delete id="deletejz">
+	   DELETE  FROM T_XT_XTJZMX WHERE ZF_BJ='1'
+    </delete>
+	
+</mapper>

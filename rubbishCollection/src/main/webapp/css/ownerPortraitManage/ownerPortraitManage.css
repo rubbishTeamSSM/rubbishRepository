@@ -1,0 +1,339 @@
+.demo-radio{
+	display:none
+}
+.demo-radioInput{
+	background-color:#fff;
+	border:1px solid rgba(0,0,0,0.15);
+	border-radius:100%;
+	display:inline-block;
+	height:16px;
+	margin-right:10px;
+	margin-top:-1px;
+	vertical-align:middle;
+	width:16px;
+	line-height:1
+	}
+.demo-radio:checked + .demo-radioInput:after{
+	background-color:#57ad68;
+	border-radius:100%;
+	content:"";
+	display:inline-block;
+	height:12px;
+	margin:2px;
+	width:12px
+	}
+
+.bodyBack{
+	background:#f4f4f4;
+	}
+.peopleHead,.houseHead{
+	width:100%;
+	overflow:hidden
+}
+.peopleBody{
+	background-color:white;
+	width:200px;
+	padding:15px;
+	border-radius:5px;
+	float:left;
+	margin:0 20px 10px 0;
+	position:relative
+}
+.peopleBody img{
+	position:absolute;
+	top:0;
+	right:0
+}
+.houseBody{
+	/* width:360px; */
+	float:left;
+	margin:0 0 20px 0;
+}
+.houseBody2{
+	/* width:360px; */
+	float:left;
+	margin:0 30px 20px 0;
+}
+.houseBody_head{
+	width:315px;
+	overflow:hidden;
+	height:30px;
+	line-height:30px;
+	border-bottom:1px solid #e0dfdf;
+	background-color:white;
+	padding: 5px 10px; 5px 15px
+}
+.houseBody_head_img{
+	float:left;
+}
+.houseBody_head_img img{
+	height:15px;
+	width:20px;
+	margin-top:7px
+}
+.houseBody_name{
+	float:left;
+	margin-left:10px
+}
+.houseBody_img{
+	float:right;
+}
+.houseBody_img img{
+	height:15px;
+	width:15px;
+	margin-top:8px
+}
+.houseBody_more{
+	float:right;
+	margin-right:10px
+}
+.houseCenter{
+	width:315px;
+	background-color:white;
+	padding: 5px 10px 5px 10px;
+}
+.houseCenter_head{
+	width:290px;margin:10px 0 0 12px;background:#f2f2f2;border-radius: 10px 10px 0px 0px;
+}
+.houseCenter_head div{
+	padding:5px 10px;height:30px;line-height:30px
+}
+.houseCenter_home{
+	width:256px;margin:0 0 15px 12px;overflow:hidden;height:80px;border:2px solid #f2f2f2;padding:10px 15px;border-radius: 0px 0px 10px 10px;
+}
+.houseCenter_img{
+	float:left; width:60px;margin-top:13px
+}
+.houseCenter_img img{
+	width:60px
+}
+.houseCenter_name{
+	float:right; width:190px;margin-top: 10px;height: 35px; line-height: 30px;border-bottom:1px solid #f4f4f4;overflow:hidden;
+}
+.floatLeft{
+	float:left;
+}
+.floatRight{
+	float:right;
+}
+.houseCenter_owner{
+	float:left;width:190px;margin-top: 5px;height: 30px; line-height: 30px;margin-left:6px
+}
+.toushu{
+	width:100%;overflow:hidden;
+}
+.toushu_head{
+	overflow:hidden;height:30px;line-height:30px;border-bottom:1px solid #f2f2f2;background-color:white;padding: 5px 10px 5px 15px
+}
+.toushu_Bf_img{
+	float:left;
+}
+.toushu_Bf_img img{
+	height:15px;width:20px;margin-top:7px
+}
+.toushu_name{
+	float:left;margin-left:10px
+}
+.toushu_more_img{
+	float:right;
+}
+.toushu_more_img img{
+	height:15px;width:15px;margin-top:8px
+}
+.toushu_more{
+	float:right;margin-right:10px
+}
+.toushu_body{
+	width:100%;overflow:hidden;background-color:white;border-bottom:1px solid #e0dfdf;
+}
+.toushu_home{
+	width:50%;float:left
+}
+.toushu_home_area{
+	padding:15px 0 10px 0;margin-left:20px;border-bottom:1px solid #f2f2f2
+}
+.toushu_home_name{
+	padding:10px 0px 10px 0;margin-left:20px;border-bottom:1px solid #f2f2f2;overflow:hidden
+}
+.toushu_phone{
+float:left;margin-left:20px
+}
+.toushu_center{
+padding:10px 0px 30px 20px;line-height: 25px;
+}
+.toushu_nr{
+font-weight:bolder
+}
+.toushu_bx{
+background: red;color: white;padding: 0 8px;border-radius: 5px;margin-right: 10px;
+}
+.toushu_img{
+width:49%;float:left;overflow:auto;position:relative;min-height:100px;
+}
+.toushu_img_div{
+	float:left;margin:15px 0 10px 20px
+}
+.toushu_img_div img{
+	height:110px;
+	width:110px;
+}
+.toushu_jiaobiao{
+	position:absolute;top:0;right:0
+}
+.find{
+width:100%;overflow:hidden;margin-top:10px
+}
+.find_top{
+overflow:hidden;height:30px;line-height:30px;border-bottom:1px solid #f2f2f2;background-color:white;padding: 5px 10px; 5px 15px
+}
+.find_before_img{
+float:left;
+}
+.find_before_img img{
+height:15px;width:20px;margin-top:7px
+}
+.find_name{
+float:left;margin-left:10px
+}
+.find_more_img{
+float:right;
+}
+.find_more_img img{
+height:15px;width:15px;margin-top:8px
+}
+
+.findMore{
+float:right;margin-right:10px
+}
+.find_center1{
+width:100%;overflow:hidden;background-color:white;border-bottom:1px solid #e0dfdf;
+}
+.find_center_img{
+width:5%;float:left;margin-left: 10px;padding-top:15px;text-align:center
+}
+.find_center_img img{
+height:60px;width: 60px;border-radius: 50px;
+}
+.find_center_man{
+width:45%;float:left
+}
+.find_center_top{
+padding:15px 0 5px 0;margin-left:20px;
+}
+.find_xian{
+margin-left:10px;padding:0 5px;background:#ffae30;color:white;border-radius:3px
+}
+.find_tj{
+margin-left:10px;padding:0 5px;background:#6dc367;color:white;border-radius:3px
+}
+.find_wy{
+margin-left:10px;padding:0 5px;background:#ff4a2d;color:white;border-radius:3px
+}
+.find_wt{
+margin-left:10px;padding:0 5px;border:1px solid #ff4a2d;color:#ff4a2d;border-radius:3px
+}
+.find_local{
+padding:10px 0px 10px 0;margin-left:20px;overflow:hidden
+}
+.find_dz{
+float:left;margin-left:20px
+}
+.find_nr{
+padding:0 0 30px 20px;line-height: 25px;
+}
+.find_img{
+width:49%;float:left;overflow:auto;position:relative
+}
+.find_img_div{
+float:left;margin:15px 0 10px 20px
+}
+.find_img_div img{
+width:110px
+}
+.find_jiaobiao{
+position:absolute;top:0;right:0
+}
+.order{
+width:100%;overflow:hidden;margin-top:10px;background:white
+}
+.order_head{
+overflow:hidden;height:30px;line-height:30px;border-bottom:1px solid #f2f2f2;background-color:white;padding: 5px 10px; 5px 15px
+}
+.order_bf_img{
+float:left;
+}
+.order_bf_img img{
+height:15px;width:20px;margin-top:7px
+}
+.order_news{
+float:left;margin-left:10px
+}
+.order_moreImg{
+float:right;
+}
+.order_moreImg img{
+height:15px;width:15px;margin-top:8px
+}
+.order_moreText{
+float:right;margin-right:10px
+}
+.order_home{
+width:100%;overflow:hidden;
+}
+.order_home_head{
+width:30%;margin:10px 1.5%;float:left;background-color:#01b1be;border-radius: 5px;
+}
+.order_home_cen{
+overflow:hidden;padding:10px 10px;color:white;border-radius:3px 3px 0 0
+}
+.order_home_cen_img{
+float:left
+}
+.order_home_cen_img img{
+height:30px
+}
+.order_home_value{
+float:left;margin:5px 0 0 10px
+}
+.order_home_status{
+float:right;margin-top:5px
+}
+.order_num{
+  overflow:hidden;padding:0 10px 10px 50px;color:white
+}
+.order_time{
+padding:0 10px 10px 50px;color:white
+}
+.order_style{
+overflow:hidden;padding:10px 7px;margin:0 3px 0 3px;background:white;border-bottom:1px solid #f2f2f2
+}
+.order_sj{
+float:left
+}
+.order_sj img{
+height:30px
+}
+.order_sj_name{
+float:left;margin:5px 0 0 10px
+}
+.order_sj_phone{
+float:right;margin-top:5px
+}
+.order_mj{
+float:left
+}
+.order_mj img{
+height:30px
+}
+.order_dz{
+overflow:hidden;padding:10px 7px 7px 7px;margin:0 3px 3px 3px;background:white;
+}
+.order_dz_img{
+float:left
+}
+.order_dz_img img{
+height:30px
+}
+.order_dz_name{
+float:left;margin:5px 0 0 10px
+}   

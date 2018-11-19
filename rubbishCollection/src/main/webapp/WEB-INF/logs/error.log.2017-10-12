@@ -1,0 +1,296 @@
+2017-10-12 19:14:15 [ http-8080-5:2391892 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.UserManageController  --> getUsers() Exception : org.springframework.dao.TransientDataAccessResourceException: 
+### Error querying database.  Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\userManagerMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.userManage.dao.IUserManageDAO.getUsers-Inline
+### The error occurred while setting parameters
+### SQL: SELECT S.USER_ID,          S.USER_NAME,          S.USER_CODE,          S.COMPANY_ID,          T.COMPANY_CODE,          T.COMPANY_NAME,          S.EMP_ID,          X.EMP_CODE,          X.EMP_NAME,          S.BINDING_ACCOUNT,          S.LOGIN_TIMES,          DATE_FORMAT(S.LAST_LOGIN_TIME,'%Y-%m-%d %T') AS LAST_LOGIN_TIME,          S.IS_ONLINE,          S.ERROR_TIMES,          S.USER_STATUS,          S.USER_CATEGORY,          S.LOCK_REASON,          DATE_FORMAT(S.FORBIDDEN_TIME,'%Y-%m-%d %T') AS FORBIDDEN_TIME,          S.PWD_UPDATED_DATE,          S.REMARK,          S.ID,          S.IS_INACTIVE     FROM MI_PV_USERS AS S       LEFT JOIN (SELECT COMPANY_ID,COMPANY_CODE,COMPANY_NAME FROM MI_PV_COMPANIES          WHERE 1 = 1                     ) AS T ON S.COMPANY_ID = T.COMPANY_ID         LEFT JOIN MI_PV_EMPLOYEES AS X ON S.EMP_ID = X.EMP_ID     WHERE S.ISOLATION_CODE=800      AND S.IS_DEL = 0                             ORDER BY S.CREATED_TIME DESC limit ?,?
+### Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+; SQL []; Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp; nested exception is java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+2017-10-12 19:14:15 [ http-8080-6:2391905 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.UserManageController  --> getUsers() Exception : org.springframework.dao.TransientDataAccessResourceException: 
+### Error querying database.  Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\userManagerMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.userManage.dao.IUserManageDAO.getUsers-Inline
+### The error occurred while setting parameters
+### SQL: SELECT S.USER_ID,          S.USER_NAME,          S.USER_CODE,          S.COMPANY_ID,          T.COMPANY_CODE,          T.COMPANY_NAME,          S.EMP_ID,          X.EMP_CODE,          X.EMP_NAME,          S.BINDING_ACCOUNT,          S.LOGIN_TIMES,          DATE_FORMAT(S.LAST_LOGIN_TIME,'%Y-%m-%d %T') AS LAST_LOGIN_TIME,          S.IS_ONLINE,          S.ERROR_TIMES,          S.USER_STATUS,          S.USER_CATEGORY,          S.LOCK_REASON,          DATE_FORMAT(S.FORBIDDEN_TIME,'%Y-%m-%d %T') AS FORBIDDEN_TIME,          S.PWD_UPDATED_DATE,          S.REMARK,          S.ID,          S.IS_INACTIVE     FROM MI_PV_USERS AS S       LEFT JOIN (SELECT COMPANY_ID,COMPANY_CODE,COMPANY_NAME FROM MI_PV_COMPANIES          WHERE 1 = 1                     ) AS T ON S.COMPANY_ID = T.COMPANY_ID         LEFT JOIN MI_PV_EMPLOYEES AS X ON S.EMP_ID = X.EMP_ID     WHERE S.ISOLATION_CODE=800      AND S.IS_DEL = 0                             ORDER BY S.CREATED_TIME DESC limit ?,?
+### Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+; SQL []; Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp; nested exception is java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+2017-10-12 19:14:41 [ http-8080-5:2418450 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.UserManageController  --> getUsers() Exception : org.springframework.dao.TransientDataAccessResourceException: 
+### Error querying database.  Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\userManagerMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.userManage.dao.IUserManageDAO.getUsers-Inline
+### The error occurred while setting parameters
+### SQL: SELECT S.USER_ID,          S.USER_NAME,          S.USER_CODE,          S.COMPANY_ID,          T.COMPANY_CODE,          T.COMPANY_NAME,          S.EMP_ID,          X.EMP_CODE,          X.EMP_NAME,          S.BINDING_ACCOUNT,          S.LOGIN_TIMES,          DATE_FORMAT(S.LAST_LOGIN_TIME,'%Y-%m-%d %T') AS LAST_LOGIN_TIME,          S.IS_ONLINE,          S.ERROR_TIMES,          S.USER_STATUS,          S.USER_CATEGORY,          S.LOCK_REASON,          DATE_FORMAT(S.FORBIDDEN_TIME,'%Y-%m-%d %T') AS FORBIDDEN_TIME,          S.PWD_UPDATED_DATE,          S.REMARK,          S.ID,          S.IS_INACTIVE     FROM MI_PV_USERS AS S       LEFT JOIN (SELECT COMPANY_ID,COMPANY_CODE,COMPANY_NAME FROM MI_PV_COMPANIES          WHERE 1 = 1                     ) AS T ON S.COMPANY_ID = T.COMPANY_ID         LEFT JOIN MI_PV_EMPLOYEES AS X ON S.EMP_ID = X.EMP_ID     WHERE S.ISOLATION_CODE=800      AND S.IS_DEL = 0                             ORDER BY S.CREATED_TIME DESC limit ?,?
+### Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+; SQL []; Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp; nested exception is java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+2017-10-12 19:14:41 [ http-8080-6:2418475 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.UserManageController  --> getUsers() Exception : org.springframework.dao.TransientDataAccessResourceException: 
+### Error querying database.  Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\userManagerMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.userManage.dao.IUserManageDAO.getUsers-Inline
+### The error occurred while setting parameters
+### SQL: SELECT S.USER_ID,          S.USER_NAME,          S.USER_CODE,          S.COMPANY_ID,          T.COMPANY_CODE,          T.COMPANY_NAME,          S.EMP_ID,          X.EMP_CODE,          X.EMP_NAME,          S.BINDING_ACCOUNT,          S.LOGIN_TIMES,          DATE_FORMAT(S.LAST_LOGIN_TIME,'%Y-%m-%d %T') AS LAST_LOGIN_TIME,          S.IS_ONLINE,          S.ERROR_TIMES,          S.USER_STATUS,          S.USER_CATEGORY,          S.LOCK_REASON,          DATE_FORMAT(S.FORBIDDEN_TIME,'%Y-%m-%d %T') AS FORBIDDEN_TIME,          S.PWD_UPDATED_DATE,          S.REMARK,          S.ID,          S.IS_INACTIVE     FROM MI_PV_USERS AS S       LEFT JOIN (SELECT COMPANY_ID,COMPANY_CODE,COMPANY_NAME FROM MI_PV_COMPANIES          WHERE 1 = 1                     ) AS T ON S.COMPANY_ID = T.COMPANY_ID         LEFT JOIN MI_PV_EMPLOYEES AS X ON S.EMP_ID = X.EMP_ID     WHERE S.ISOLATION_CODE=800      AND S.IS_DEL = 0                             ORDER BY S.CREATED_TIME DESC limit ?,?
+### Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+; SQL []; Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp; nested exception is java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+2017-10-12 19:31:39 [ http-8080-4:79285 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.combo.controller.ComboboxMgrController--> getDictionaryList() Exception ：
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\combo\comboboxMgrMapper.xml]
+### The error may involve com.neusoft.sdd.combo.dao.IComboboxMgrDAO.getDictionaryList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT COMPANY_ID as CODE                    ,COMPANY_NAME as NAME                         FROM MI_PV_COMPANIES       WHERE DEL_FLAG = 0
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:237)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:73)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:371)
+	at com.sun.proxy.$Proxy18.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:198)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:114)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:58)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:43)
+	at com.sun.proxy.$Proxy23.getDictionaryList(Unknown Source)
+	at com.neusoft.sdd.combo.service.impl.ComboboxMgrServiceImpl.getDictionaryList(ComboboxMgrServiceImpl.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:96)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:94)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at com.sun.proxy.$Proxy24.getDictionaryList(Unknown Source)
+	at com.neusoft.sdd.combo.controller.ComboboxMgrController.getDictionaryList(ComboboxMgrController.java:46)
+	at com.neusoft.sdd.combo.controller.ComboboxMgrController$$FastClassByCGLIB$$66871b53.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:698)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:55)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:631)
+	at com.neusoft.sdd.combo.controller.ComboboxMgrController$$EnhancerByCGLIB$$7bd02786.getDictionaryList(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:717)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.neusoft.sdd.base.filter.ConversationFilter.doFilter(ConversationFilter.java:56)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:857)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:662)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:513)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.Util.getInstance(Util.java:386)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1054)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4237)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4169)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2617)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2778)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2834)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2156)
+	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1379)
+	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.execute(NewProxyPreparedStatement.java:989)
+	at sun.reflect.GeneratedMethodAccessor78.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:55)
+	at com.sun.proxy.$Proxy86.execute(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:56)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:70)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:57)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:259)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:132)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:105)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:81)
+	at sun.reflect.GeneratedMethodAccessor81.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:46)
+	at com.github.pagehelper.SqlUtil._processPage(SqlUtil.java:351)
+	at com.github.pagehelper.SqlUtil.processPage(SqlUtil.java:329)
+	at com.github.pagehelper.PageHelper.intercept(PageHelper.java:150)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:57)
+	at com.sun.proxy.$Proxy84.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:104)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:98)
+	at sun.reflect.GeneratedMethodAccessor89.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:358)
+	... 67 more
+2017-10-12 19:31:40 [ http-8080-3:79850 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.combo.controller.ComboboxMgrController--> getDictionaryList() Exception ：
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\combo\comboboxMgrMapper.xml]
+### The error may involve com.neusoft.sdd.combo.dao.IComboboxMgrDAO.getDictionaryList-Inline
+### The error occurred while setting parameters
+### SQL: SELECT DICT_KEY as CODE                    ,DICT_VALUE as NAME                         FROM MI_SYS_DICTIONARY       WHERE DEL_FLAG = 0                    AND DICT_NO = ?
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:237)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:73)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:371)
+	at com.sun.proxy.$Proxy18.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:198)
+	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:114)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:58)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:43)
+	at com.sun.proxy.$Proxy23.getDictionaryList(Unknown Source)
+	at com.neusoft.sdd.combo.service.impl.ComboboxMgrServiceImpl.getDictionaryList(ComboboxMgrServiceImpl.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:317)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:96)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:260)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:94)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at com.sun.proxy.$Proxy24.getDictionaryList(Unknown Source)
+	at com.neusoft.sdd.combo.controller.ComboboxMgrController.getDictionaryList(ComboboxMgrController.java:46)
+	at com.neusoft.sdd.combo.controller.ComboboxMgrController$$FastClassByCGLIB$$66871b53.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:698)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:55)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:91)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:631)
+	at com.neusoft.sdd.combo.controller.ComboboxMgrController$$EnhancerByCGLIB$$7bd02786.getDictionaryList(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:717)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:88)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.neusoft.sdd.base.filter.ConversationFilter.doFilter(ConversationFilter.java:56)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:857)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:662)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'DEL_FLAG' in 'where clause'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:513)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.Util.getInstance(Util.java:386)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1054)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4237)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4169)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2617)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2778)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2834)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2156)
+	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1379)
+	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.execute(NewProxyPreparedStatement.java:989)
+	at sun.reflect.GeneratedMethodAccessor78.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:55)
+	at com.sun.proxy.$Proxy86.execute(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:56)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:70)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:57)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:259)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:132)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:105)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:81)
+	at sun.reflect.GeneratedMethodAccessor81.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:46)
+	at com.github.pagehelper.SqlUtil._processPage(SqlUtil.java:351)
+	at com.github.pagehelper.SqlUtil.processPage(SqlUtil.java:329)
+	at com.github.pagehelper.PageHelper.intercept(PageHelper.java:150)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:57)
+	at com.sun.proxy.$Proxy84.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:104)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:98)
+	at sun.reflect.GeneratedMethodAccessor89.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:358)
+	... 67 more
+2017-10-12 19:31:40 [ http-8080-1:80504 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.UserManageController  --> getUsers() Exception : org.springframework.dao.TransientDataAccessResourceException: 
+### Error querying database.  Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\userManagerMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.userManage.dao.IUserManageDAO.getUsers-Inline
+### The error occurred while setting parameters
+### SQL: SELECT S.USER_ID,          S.USER_NAME,          S.USER_CODE,          S.COMPANY_ID,          T.COMPANY_CODE,          T.COMPANY_NAME,          S.EMP_ID,          X.EMP_CODE,          X.EMP_NAME,          S.BINDING_ACCOUNT,          S.LOGIN_TIMES,          DATE_FORMAT(S.LAST_LOGIN_TIME,'%Y-%m-%d %T') AS LAST_LOGIN_TIME,          S.IS_ONLINE,          S.ERROR_TIMES,          S.USER_STATUS,          S.USER_CATEGORY,          S.LOCK_REASON,          DATE_FORMAT(S.FORBIDDEN_TIME,'%Y-%m-%d %T') AS FORBIDDEN_TIME,          S.PWD_UPDATED_DATE,          S.REMARK,          S.ID,          S.IS_INACTIVE     FROM MI_PV_USERS AS S       LEFT JOIN (SELECT COMPANY_ID,COMPANY_CODE,COMPANY_NAME FROM MI_PV_COMPANIES          WHERE 1 = 1                     ) AS T ON S.COMPANY_ID = T.COMPANY_ID         LEFT JOIN MI_PV_EMPLOYEES AS X ON S.EMP_ID = X.EMP_ID     WHERE S.ISOLATION_CODE=800      AND S.IS_DEL = 0                             ORDER BY S.CREATED_TIME DESC limit ?,?
+### Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+; SQL []; Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp; nested exception is java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+2017-10-12 19:31:40 [ http-8080-3:80504 ] - [ ERROR ] IServiceException : class com.neusoft.sdd.systemSetting.userManage.controller.UserManageController  --> getUsers() Exception : org.springframework.dao.TransientDataAccessResourceException: 
+### Error querying database.  Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+### The error may exist in file [E:\workspace\hisense-systemServer\target\classes\mapper\systemSetting\userManagerMapper.xml]
+### The error may involve com.neusoft.sdd.systemSetting.userManage.dao.IUserManageDAO.getUsers-Inline
+### The error occurred while setting parameters
+### SQL: SELECT S.USER_ID,          S.USER_NAME,          S.USER_CODE,          S.COMPANY_ID,          T.COMPANY_CODE,          T.COMPANY_NAME,          S.EMP_ID,          X.EMP_CODE,          X.EMP_NAME,          S.BINDING_ACCOUNT,          S.LOGIN_TIMES,          DATE_FORMAT(S.LAST_LOGIN_TIME,'%Y-%m-%d %T') AS LAST_LOGIN_TIME,          S.IS_ONLINE,          S.ERROR_TIMES,          S.USER_STATUS,          S.USER_CATEGORY,          S.LOCK_REASON,          DATE_FORMAT(S.FORBIDDEN_TIME,'%Y-%m-%d %T') AS FORBIDDEN_TIME,          S.PWD_UPDATED_DATE,          S.REMARK,          S.ID,          S.IS_INACTIVE     FROM MI_PV_USERS AS S       LEFT JOIN (SELECT COMPANY_ID,COMPANY_CODE,COMPANY_NAME FROM MI_PV_COMPANIES          WHERE 1 = 1                     ) AS T ON S.COMPANY_ID = T.COMPANY_ID         LEFT JOIN MI_PV_EMPLOYEES AS X ON S.EMP_ID = X.EMP_ID     WHERE S.ISOLATION_CODE=800      AND S.IS_DEL = 0                             ORDER BY S.CREATED_TIME DESC limit ?,?
+### Cause: java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
+; SQL []; Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp; nested exception is java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp

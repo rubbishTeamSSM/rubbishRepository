@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.sdd.businessConsole.login.dao.ILoginDao">
+
+	<!-- 登录 -->
+	<select id="getLoginUser" parameterType="user" resultType="map">
+		SELECT T.USER_CODE USER_ID,
+		       T.USER_ACCNT,
+		       IFNULL(T.USER_NICK_NAME,'') AS USER_NICK_NAME,
+		       T.USER_NAME,
+		       IFNULL(T.PIC_URL,'') AS PIC_URL,
+		       T.ADMIN_FLAG,
+		       T.SEX,
+		       T.SPECIAL_FLAG,
+		       IFNULL(T.PHONE,T.USER_ACCNT) AS PHONE,
+		       IFNULL(T.TEL,'') AS TEL,
+		       T.DEL_FLAG,
+		       T.UUID,
+		       T.USER_PWD
+		  FROM T_SYS_USER T
+		 WHERE T.USER_ACCNT = #{USER_ACCNT}
+		   <!-- AND T.USER_PWD = #{USER_PWD} -->
+		   AND T.DEL_FLAG = 0
+	</select>
+	<!-- 短信验证码登录 -->
+	<select id="getLoginUserByCode" parameterType="user" resultType="map">
+		SELECT T.USER_CODE USER_ID,
+		       T.USER_ACCNT,
+		       IFNULL(T.USER_NICK_NAME,'') AS USER_NICK_NAME,
+		       T.USER_NAME,
+		       IFNULL(T.PIC_URL,'') AS PIC_URL,
+		       T.ADMIN_FLAG,
+		       T.SEX,
+		   	   T.SPECIAL_FLAG,
+		   	   IFNULL(T.PHONE,T.USER_ACCNT) AS PHONE,
+		       IFNULL(T.TEL,'') AS TEL,
+		       T.DEL_FLAG,
+		       T.UUID
+		  FROM T_SYS_USER T
+		 WHERE T.USER_ACCNT = #{USER_ACCNT}
+		   AND T.DEL_FLAG = 0
+	</select>
+	<!-- 新增用户信息 -->
+	<insert id="addNewUser" parameterType="map">
+		INSERT INTO T_SYS_USER
+		  (UUID,
+		   USER_CODE,
+		   USER_ACCNT,
+		   USER_NAME,
+		   USER_PWD,
+		   USER_NICK_NAME,
+		   SPECIAL_FLAG,
+		   ADMIN_FLAG,
+		   ID_CARD,
+		   SEX,
+		   TEL,
+		   PHONE,
+		   EMAIL,
+		   PIC_URL,
+		   IP,
+		   SORT_NO,
+		   DEL_FLAG,
+		   REMARK,
+		   CREATED_TIME,
+		   CREATED_BY,
+		   UPDATED_TIME,
+		   UPDATED_BY)
+		VALUES
+		  (#{UUID,jdbcType=VARCHAR},
+		   #{USER_CODE,jdbcType=VARCHAR}, 
+		   #{USER_ACCNT,jdbcType=VARCHAR},
+		   #{USER_NAME,jdbcType=VARCHAR},
+		   #{USER_PWD,jdbcType=VARCHAR},
+		   #{USER_NAME,jdbcType=VARCHAR},
+		   0,
+		   0, 
+		   null, 
+		   null, 
+		   null, 
+		   #{USER_ACCNT,jdbcType=VARCHAR}, 
+		   null, 
+		   null, 
+		   null, 
+		   0, 
+		   0, 
+		   null,
+		   NOW(), 
+		   #{USER_CODE,jdbcType=VARCHAR}, 
+		   NOW(), 
+		   #{USER_CODE,jdbcType=VARCHAR})
+	</insert>
+	
+	 <!-- 更新用户信息 -->
+	 <update id="updateUser" parameterType="user">
+		UPDATE T_SYS_USER
+		   SET USER_NAME =#{USER_NAME},
+		       UPDATED_TIME = NOW(),
+		       UPDATED_BY = #{USER_CODE}
+		 WHERE USER_CODE=#{USER_CODE}
+	 </update>
+</mapper>

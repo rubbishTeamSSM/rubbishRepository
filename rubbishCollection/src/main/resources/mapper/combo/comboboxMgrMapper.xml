@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.combo.dao.IComboboxMgrDAO">
+	
+	<!-- 字典表查询 -->
+	<select id="getDictionaryList" parameterType="java.util.Map" resultType="java.util.HashMap" >
+      SELECT ${code} as CODE
+       <if test="concat_name != null and concat_name != ''">
+			 ,${concat_name} NAME
+	  </if>
+	   <if test="name != null and name != ''">
+			 ,${name} as NAME
+	  </if>
+	  
+	  <if test="my_name_id != null and my_name_id != ''">
+	  		,${my_name_id} as ID
+	  </if>
+	  
+      FROM ${table_name}
+      WHERE DEL_FLAG = 0
+      <if test="where_key != null and where_key != ''">
+			 AND ${where_key} = #{where_value}
+	  </if>
+      <if test="where_key1 != null and where_key1 != ''">
+			 AND ${where_key1} = #{where_value1}
+	  </if>
+	  <if test="where_key2 != null and where_key2 != ''">
+			 AND ${where_key2} = #{where_value2}
+	  </if>
+      <if test="where_sql != null and where_sql != ''">
+			 AND ${where_sql}
+	  </if>
+	   <if test="area_code_se != null and area_code_se != ''">
+			 AND NOT EXISTS (
+				 SELECT
+					    1	
+				   FROM
+					    T_SYS_AREA_POST
+				  WHERE
+					    AREA_CODE = #{area_code_se}
+				    AND DEL_FLAG = 0
+				    AND POST_CODE=A.POST_CODE
+			)
+	  </if>
+	  
+    </select>
+    
+    
+    <select id="countDictionary" parameterType="java.util.Map" resultType="int">
+      SELECT COUNT(1)
+      FROM ${table_name}
+      WHERE DEL_FLAG = 0
+       <if test="where_key != null and where_key != ''">
+			 AND ${where_key} = #{where_value}
+	  </if>
+      <if test="where_key1 != null and where_key1 != ''">
+			 AND ${where_key1} = #{where_value1}
+	  </if>
+	  <if test="where_key2 != null and where_key2 != ''">
+			 AND ${where_key2} = #{where_value2}
+	  </if>
+      <if test="where_sql != null and where_sql != ''">
+			 AND ${where_sql}
+	  </if>
+    </select>
+
+    <!-- 验证下拉框的数据是否存在 -->
+    <select id="comboboxCheck"  resultType="java.lang.Integer" parameterType="map">
+	 	SELECT COUNT(1) 
+	 	FROM ${table_name} 
+	 	WHERE DEL_FLAG = 0
+	 	<if test="concat_name != null and concat_name != ''">
+			 AND ${concat_name} = #{ck_value}
+	  	</if>
+	   	<if test="name != null and name != ''">
+			 AND ${name} = #{ck_value}
+	  	</if>
+	  	<if test="where_key != null and where_key != ''">
+	 	 	AND ${where_key} = #{where_value}
+	  	</if>
+      	<if test="where_key1 != null and where_key1 != ''">
+		 	AND ${where_key1} = #{where_value1}
+	  	</if>
+	  	<if test="where_key2 != null and where_key2 != ''">
+		 	AND ${where_key2} = #{where_value2}
+	  	</if>
+      	<if test="where_sql != null and where_sql != ''">
+		 	AND ${where_sql}
+	  	</if>
+ 	</select>
+ 	
+ 	<!-- 查重  -->
+	 <select id="duplicateCheck"  resultType="java.lang.Integer" parameterType="map">
+	 	SELECT
+			COUNT(1)
+		FROM
+			${TABLE_NAME }
+		WHERE
+			DEL_FLAG = 0
+		AND ${COLUMNS_NAME } = #{VALUE}
+	 	<if test="MODI_VALUE != null and MODI_VALUE != ''">
+	 		AND ${COLUMNS_NAME} != #{MODI_VALUE}
+		</if>
+		<if test="WHERE_KEY != null and WHERE_KEY != ''">
+	 		AND ${WHERE_KEY} = #{WHERE_VALUE}
+		</if>
+	 </select>
+</mapper>

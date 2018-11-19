@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.sdd.logManage.dao.ILogMgrDao">
+	
+	<!-- 查询登录日志 -->
+	<select id="getLoginLog" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			T.UUID,
+			T.LOGIN_ACCNT,
+			T.OPERA_NAME,
+	        T.DETAIL,
+	        T.IP,
+	        T.CREATED_BY,
+	        DATE_FORMAT(T.CREATED_TIME,'%Y-%m-%d %H:%i:%S') AS CREATED_TIME
+		FROM T_LOG_LOGIN T
+		WHERE T.DEL_FLAG = 0
+		<if test = "UUID != null and UUID != ''" >
+			AND T.UUID = #{UUID}
+		</if>
+		<if test="BEGINDATE != null and BEGINDATE != ''">
+			AND  T.CREATED_TIME &gt;= DATE_FORMAT(#{BEGINDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		<if test="ENDDATE != null and ENDDATE != ''">
+			AND  T.CREATED_TIME &lt;= DATE_FORMAT(#{ENDDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		ORDER BY T.CREATED_TIME DESC
+	</select>
+	
+	<!-- 查询启动日志 -->
+	<select id="getStartLog" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			T.UUID, 
+			T.CONSOLE_NAME,
+			T.OPERA_NAME,
+	        T.IP,
+	        T.CREATED_BY,
+	        DATE_FORMAT(T.CREATED_TIME,'%Y-%m-%d %H:%i:%S') AS CREATED_TIME
+		FROM T_LOG_CONSOLE T
+		WHERE T.DEL_FLAG = 0
+		<if test = "UUID != null and UUID != ''" >
+			AND T.UUID = #{UUID}
+		</if>
+		<if test="BEGINDATE != null and BEGINDATE != ''">
+			AND  T.CREATED_TIME &gt;= DATE_FORMAT(#{BEGINDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		<if test="ENDDATE != null and ENDDATE != ''">
+			AND  T.CREATED_TIME &lt;= DATE_FORMAT(#{ENDDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		ORDER BY T.CREATED_TIME DESC
+	</select>
+	
+	<!-- 查询商铺访问日志 -->
+	<select id="getShopLog" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			T.UUID, 
+			T.AREA_CODE,
+			T.OWNER_CODE,
+	        T.SELLER_NO,
+	        T.CREATED_BY,
+	        DATE_FORMAT(T.CREATED_TIME,'%Y-%m-%d %H:%i:%S') AS CREATED_TIME
+		FROM T_LOG_SHOP T
+		WHERE T.DEL_FLAG = 0
+		<if test = "UUID != null and UUID != ''" >
+			AND T.UUID = #{UUID}
+		</if>
+		<if test="BEGINDATE != null and BEGINDATE != ''">
+			AND  T.CREATED_TIME &gt;= DATE_FORMAT(#{BEGINDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		<if test="ENDDATE != null and ENDDATE != ''">
+			AND  T.CREATED_TIME &lt;= DATE_FORMAT(#{ENDDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		ORDER BY T.CREATED_TIME DESC
+	</select>
+	
+	<!-- 查询商品访问日志 -->
+	<select id="getCommodityLog" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			T.UUID ,
+			T.AREA_CODE,
+			T.OWNER_CODE,
+			T.SKU_NO,
+			T.SKU_NAME,
+			T.GOODS_NO,
+			T.GOODS_NAME,
+			T.SELLER_NO,
+			T.SELLER_NAME,
+	        T.CREATED_BY,
+	        DATE_FORMAT(T.CREATED_TIME,'%Y-%m-%d %H:%i:%S') AS CREATED_TIME
+		FROM T_LOG_GOODS T
+		WHERE T.DEL_FLAG = 0
+		<if test = "UUID != null and UUID != ''" >
+			AND T.UUID = #{UUID}
+		</if>
+		<if test="BEGINDATE != null and BEGINDATE != ''">
+			AND  T.CREATED_TIME &gt;= DATE_FORMAT(#{BEGINDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		<if test="ENDDATE != null and ENDDATE != ''">
+			AND  T.CREATED_TIME &lt;= DATE_FORMAT(#{ENDDATE},'%Y-%m-%d %H:%i:%S')
+		</if>
+		ORDER BY T.CREATED_TIME DESC
+	</select>
+	
+	<insert id="addLog" parameterType="java.util.Map">
+		INSERT INTO T_SYS_LOG
+			  (ID,
+			   IP,
+			   FUN_PARAM,
+			   FUN_DESC,
+			   FUN_NAME,
+			   OP_TYPE,
+			   DETAIL,
+			   CREATED_BY,
+			   CREATED_TIME,
+			   UPDATED_BY,
+			   UPDATED_TIME,
+			   IS_INACTIVE,
+			   SYSTEM_FLAG)
+			VALUES
+			  (
+			    #{ID,jdbcType=VARCHAR},
+			    #{IP,jdbcType=VARCHAR},
+			    #{FUN_PARAM,jdbcType=VARCHAR},
+			    #{FUN_DESC,jdbcType=VARCHAR},
+			    #{FUN_NAME,jdbcType=VARCHAR},
+			    #{OP_TYPE,jdbcType=NUMERIC},
+			    #{DETAIL,jdbcType=VARCHAR},
+			    #{CREATED_BY,jdbcType=VARCHAR},
+			    NOW(),
+			    #{CREATED_BY,jdbcType=VARCHAR},
+			    NOW(),
+			    0,
+			    0
+  		 )
+	</insert>
+</mapper>
